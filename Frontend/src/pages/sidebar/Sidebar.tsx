@@ -1,0 +1,77 @@
+import { BasicLogoText } from "@/assets/BasicLogoText"
+import { FaChartPie   } from "react-icons/fa";
+import { MdOutlineDescription } from "react-icons/md";
+import { MdOutlineCreditCard } from "react-icons/md";
+import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { MdOutlineSettings } from "react-icons/md";
+import MyPhotoExample from "@/assets/profissional-photo.jpeg"
+
+export function Sidebar() {
+
+    return (
+        <div className="flex flex-col w-70 h-full bg-[#0F172A]">
+            <div className="pt-5 pl-5">
+                <BasicLogoText
+                    white={true}
+                    posStart={true}
+                />
+            </div>
+
+            <div className="h-full flex flex-col justify-center">
+                <nav>
+                    <ul className="flex flex-col pt-6 ml-3 gap-2">
+                        <li>
+                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                                <FaChartPie size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Dashboard</p>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                                <MdOutlineDescription size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Extrato</p>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                                <MdOutlineCreditCard size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Cartões</p>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                                <MdOutlineAccountBalanceWallet size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Carteira</p>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                                <MdOutlineSettings size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Configurações</p>
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </nav>
+            
+                <li className="mt-auto flex justify-center items-center mb-4">
+                    <button className="cursor-pointer flex justify-center items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 p-2 rounded-md text-white">
+                        
+                        <img className="w-11 h-11 rounded-full" src={MyPhotoExample}></img>
+                        
+                        <div className="flex flex-col items-start">
+                            <p>Luiz Humberto</p>
+                            <p className="text-sm text-[#94A3B8]">Premium</p>
+                        </div>
+                    </button>
+                </li>
+            </div>
+
+        </div>
+    )
+}
