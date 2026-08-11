@@ -1,14 +1,34 @@
 import { BasicLogoText } from "@/assets/BasicLogoText"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FetchLogin } from "@/controllers/fetchLogin";
+import { useAuth } from "@/contexts/authContext";
+
+const fetchLogin = new FetchLogin();
 
 export function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
-    function handleSubmitLogin(event: any) {
+    async function handleSubmitLogin(event: any) {
         event.preventDefault();
+
+        const response = await fetchLogin.execute(email, password);
+
+        if(response.status == 201) {
+
+            login(response.data.access_token, 
+                response.data.payload.email, 
+                response.data.payload.sub, 
+                response.data.payload.name, 
+                response.data.payload.surname
+            );
+
+            navigate("/dashboard");
+
+        }
     }
 
     return(

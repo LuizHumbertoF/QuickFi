@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BasicLogoText } from "@/assets/BasicLogoText";
 import { useNavigate } from "react-router-dom";
 import { FetchRegisterUser } from "@/controllers/fetchRegisterUser";
+import { useAuth } from "@/contexts/authContext";
 
 
 const fetchRegisterUser = new FetchRegisterUser();
@@ -10,20 +11,25 @@ export function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     async function handleSubmit(event: any) {
         event.preventDefault();
-        const response = await fetchRegisterUser.execute(name, email, password);
+        const response = await fetchRegisterUser.execute(name, email, password, surname);
 
-        if(response.data.access_token) {
-            await localStorage.setItem("token", response.data.access_token);
-            
-            console.log("Usuario registrado com sucesso!");
-            alert("Usuario registrado com sucesso!");
+        if(response.status == 201) {
+
+            login(response.data.access_token, 
+                response.data.payload.email, 
+                response.data.payload.sub, 
+                response.data.payload.name, 
+                response.data.payload.surname
+            );
+
             navigate("/dashboard");
         }
-
     }
 
     return (
@@ -42,7 +48,7 @@ export function RegisterPage() {
                 >
 
                     <div className="w-92 gap-1 flex flex-col justify-start">
-                        <p className="text-gray-600 font-semibold text-sm">Nome completo</p>
+                        <p className="text-gray-600 font-semibold text-sm">Nome</p>
                         <input
                             className="w-full border border-gray-200 p-2 rounded-md" 
                             type="text"
@@ -50,6 +56,18 @@ export function RegisterPage() {
                             placeholder="Digite seu nome..."
                             value={name}
                             onChange={(event) => setName(event.target.value)}
+                        />
+                    </div>
+
+                    <div className="w-92 gap-1 flex flex-col justify-start">
+                        <p className="text-gray-600 font-semibold text-sm">Sobrenome</p>
+                        <input
+                            className="w-full border border-gray-200 p-2 rounded-md" 
+                            type="text"
+                            name="surname"
+                            placeholder="Digite seu sobrenome..."
+                            value={surname}
+                            onChange={(event) => setSurname(event.target.value)}
                         />
                     </div>
 
