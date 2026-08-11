@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { BasicLogoText } from "@/assets/BasicLogoText";
 import { useNavigate } from "react-router-dom";
+import { FetchRegisterUser } from "@/controllers/fetchRegisterUser";
+
+
+const fetchRegisterUser = new FetchRegisterUser();
 
 export function RegisterPage() {
     const [email, setEmail] = useState("");
@@ -8,8 +12,18 @@ export function RegisterPage() {
     const [name, setName] = useState("");
     const navigate = useNavigate();
 
-    function handleSubmit(event: any) {
+    async function handleSubmit(event: any) {
         event.preventDefault();
+        const response = await fetchRegisterUser.execute(name, email, password);
+
+        if(response.data.access_token) {
+            await localStorage.setItem("token", response.data.access_token);
+            
+            console.log("Usuario registrado com sucesso!");
+            alert("Usuario registrado com sucesso!");
+            navigate("/dashboard");
+        }
+
     }
 
     return (

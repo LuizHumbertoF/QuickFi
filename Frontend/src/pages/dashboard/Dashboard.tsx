@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { Sidebar } from "../sidebar/Sidebar"
 import { MdOutlineSearch } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
+import { useAuth } from "@/contexts/authContext";
+
 
 export function Dashboard() {
+    
+    const { token } = useAuth();
 
+    useState(() => {
+        if(token) {
+
+        }
+    })
+    
     return(
         <div className="w-screen h-screen bg-white flex">
             
