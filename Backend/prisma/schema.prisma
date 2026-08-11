@@ -1,0 +1,70 @@
+// Dinheiro está sendo armazenado como centavos totais, por enquanto
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts   Account[]
+  categories Category[]
+}
+
+model Account {
+  id      Int    @id @default(autoincrement())
+  userId  Int
+  name    String
+  type    String
+  balance Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions Transaction[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Transaction {
+  id              Int      @id @default(autoincrement())
+  accountId       Int
+  categoryId      Int
+  type            String
+  amount          Int
+  description     String?
+  transactionDate DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account  Account  @relation(fields: [accountId], references: [id], onDelete: Restrict)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  type        String
+  name        String
+  description String?
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions Transaction[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
