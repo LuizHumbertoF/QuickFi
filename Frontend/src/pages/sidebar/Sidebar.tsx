@@ -1,15 +1,12 @@
 import { BasicLogoText } from "@/assets/BasicLogoText"
 import { FaChartPie   } from "react-icons/fa";
-import { MdOutlineDescription } from "react-icons/md";
-import { MdOutlineCreditCard } from "react-icons/md";
-import { MdOutlineAccountBalanceWallet } from "react-icons/md";
-import { MdOutlineSettings } from "react-icons/md";
+import { MdOutlineCreditCard, MdOutlineAccountBalanceWallet, MdOutlineSettings } from "react-icons/md";
 import MyPhotoExample from "@/assets/profissional-photo.jpeg"
 import { useAuth } from "@/contexts/authContext";
-import { LuUser, LuLogOut } from "react-icons/lu";
+import { LuUser, LuLogOut, LuCircleUserRound, LuArrowLeftRight } from "react-icons/lu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LuArrowLeftRight } from "react-icons/lu";
+
 
 
 export function Sidebar() {
@@ -52,8 +49,8 @@ export function Sidebar() {
 
                         <li>
                             <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
-                                <MdOutlineDescription size={20} className="text-[#10B981]"/>
-                                <p className="text-white">Extrato</p>
+                                <LuCircleUserRound size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Contas</p>
                             </button>
                         </li>
 

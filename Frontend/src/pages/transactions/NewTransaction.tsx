@@ -10,11 +10,38 @@ import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { MdOutlineCreditCard } from "react-icons/md";
 import { LuCalendar } from "react-icons/lu";
 import { LuSparkles   } from "react-icons/lu";
+import { LuTags } from "react-icons/lu";
+import { LuBriefcaseBusiness, LuBadgeDollarSign, LuChartNoAxesCombined, LuHouse, LuUtensils, LuCar, LuGamepad2, LuShoppingBag, LuEllipsis  } from "react-icons/lu";
 
 export function NewTransaction() {
+    const MAX_AMOUNT = 9999999; // R$ 99.999,99 em centavos
+
     const [recurrentTransaction, setRecurrentTransaction] = useState(false);
     const [transactionType, setTransactionType] = useState<"receita" | "despesa" | undefined>(undefined);
+    const [amount, setAmount] = useState<number>(0);
+    const [ transactionDescription, setTransactionDescription ] = useState<string>("");
+    const [ transactionDate, setTransactionDate ] = useState("");
+    const [ transactionCategory, setTransactionCategory ] = useState<string | undefined>(undefined);
+    const [ openedCategoryModal, setOpenedCategoryModal ] = useState<boolean>(false);
     const navigate = useNavigate();
+
+    const handleAmountChange = (value: string) => {
+        const numbers = value.replace(/\D/g, "");
+
+        const cents = Number(numbers);
+
+        if (cents > MAX_AMOUNT) {
+            return;
+        }
+
+        setAmount(cents);
+    };
+
+    const formatDate = (date: string) => {
+        if (!date) return "";
+
+        return new Date(date + "T00:00:00").toLocaleDateString("pt-BR");
+    };
 
     return (
 
@@ -140,6 +167,15 @@ export function NewTransaction() {
                             <p className="text-sm font-semibold text-[#414f63]">Valor</p>
                             <input className="h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                 placeholder="R$ 0,00"
+                                value={
+                                    amount
+                                    ? (amount / 100).toLocaleString("pt-BR", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    })
+                                    : ""
+                                }
+                                onChange={(e) => handleAmountChange(e.target.value)}
                             />
 
                             <div className="flex gap-6">
@@ -148,6 +184,8 @@ export function NewTransaction() {
                                     <input className="h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                         placeholder="Ex: Salário, Supermercado, Uber..."
                                         type="text"
+                                        value={transactionDescription}
+                                        onChange={(e) => setTransactionDescription(e.target.value)}
                                     />
                                 </div>
 
@@ -155,6 +193,8 @@ export function NewTransaction() {
                                     <p className="text-sm font-semibold text-[#414f63]">Data</p>
                                     <input className="h-9 text-[#414f63] border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                         type="date"
+                                        value={transactionDate}
+                                        onChange={(e) => setTransactionDate(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -164,13 +204,124 @@ export function NewTransaction() {
                                     <p className="text-sm font-semibold text-[#414f63]">Categoria</p>
                                     <button 
                                         className=" gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
-                                    >
-                                        <div className="w-3 h-3 rounded-full bg-purple-700"></div>
-                                        Selecione uma categoria
+                                        onClick={() => setOpenedCategoryModal(!openedCategoryModal)}
+                                    >   
+                                        <LuTags className="text-purple-600 w-4.5 h-4.5"/>
+                                        {transactionCategory ? transactionCategory : "Selecione uma categoria"}
                                         <div className="ml-auto">
-                                            <LuChevronDown/>
+                                            <LuChevronDown className={`transition-transform duration-200 ${
+                                                openedCategoryModal ? "rotate-180" : "rotate-0"
+                                            }`}/>
                                         </div>
                                     </button>
+                                    {
+                                        openedCategoryModal ?
+                                        (
+                                            <div className="fixed z-50 mt-16 flex flex-col items-center   rounded-md shadow-md border border-[#E2E8F0] bg-white w-1/5 max-h-42 overflow-y-auto">
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 py-3 border-[#94A3B8] w-full shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Salário");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuBadgeDollarSign className="w-5 h-5 text-[#10B981]"/>
+                                                    Salário
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Trabalho");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuBriefcaseBusiness className="w-5 h-5 text-[#10B981]"/>
+                                                    Trabalho
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Investimentos");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuChartNoAxesCombined className="w-5 h-5 text-[#10B981]"/>
+                                                    Investimentos
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Moradia");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuHouse className="w-5 h-5 text-[#10B981]"/>
+                                                    Moradia
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Alimentação");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuUtensils className="w-5 h-5 text-[#10B981]"/>
+                                                    Alimentação
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Transporte");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuCar className="w-5 h-5 text-[#10B981]"/>
+                                                    Transporte
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Lazer");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuGamepad2 className="w-5 h-5 text-[#10B981]"/>
+                                                    Lazer
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Compras");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuShoppingBag className="w-5 h-5 text-[#10B981]"/>
+                                                    Compras
+                                                </button>
+
+                                                <button 
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    onClick={() => {
+                                                        setTransactionCategory("Outro");
+                                                        setOpenedCategoryModal(false);
+                                                    }}
+                                                >
+                                                    <LuEllipsis className="w-5 h-5 text-[#10B981]"/>
+                                                    Outro
+                                                </button>
+                                            </div>
+                                        )
+                                        :
+                                        (<></>)
+                                    }     
+
                                 </div>
 
                                 <div className="w-3/7 flex flex-col">
@@ -230,26 +381,33 @@ export function NewTransaction() {
 
                                                     <p className="text-[#10B981] font-bold">Receita</p>
 
-                                                    <h3 className="text-[#10B981] font-bold text-2xl">R$ 0,00</h3>
+                                                    <h3 className="text-[#10B981] font-bold text-2xl">{(amount / 100).toLocaleString("pt-BR", {
+                                                            style: "currency",
+                                                            currency: "BRL",
+                                                        })}
+                                                    </h3>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <LuCalendar className="text-[#414f63]"/>
+                                                    <LuCalendar className="text-[#414f63] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Data</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{formatDate(transactionDate)}</p>
+
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <LuCalendar className="text-[#414f63]"/>
+                                                    <LuTags className="text-purple-600 w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Categoria</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{transactionCategory}</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <MdOutlineAccountBalanceWallet className="text-[#10B981]"/>
+                                                    <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Conta</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <MdOutlineCreditCard className="text-blue-500" />
+                                                    <MdOutlineCreditCard className="text-blue-500 w-4.5 h-4.5" />
                                                     <p className="text-sm font-semibold text-[#414f63]">Forma de pagamento</p>
                                                 </div>
                                             </div>
@@ -266,26 +424,32 @@ export function NewTransaction() {
 
                                                     <p className="text-red-500 font-bold">Despesa</p>
 
-                                                    <h3 className="text-red-500 font-bold text-2xl">R$ 0,00</h3>
+                                                    <h3 className="text-red-500 font-bold text-2xl">{(amount / 100).toLocaleString("pt-BR", {
+                                                            style: "currency",
+                                                            currency: "BRL",
+                                                        })}
+                                                    </h3>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <LuCalendar className="text-[#414f63]"/>
+                                                    <LuCalendar className="text-[#414f63] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Data</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{formatDate(transactionDate)}</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <LuCalendar className="text-[#414f63]"/>
+                                                    <LuTags className="text-purple-600 w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Categoria</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{transactionCategory}</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <MdOutlineAccountBalanceWallet className="text-[#10B981]"/>
+                                                    <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Conta</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
-                                                    <MdOutlineCreditCard className="text-blue-500" />
+                                                    <MdOutlineCreditCard className="text-blue-500 w-4.5 h-4.5" />
                                                     <p className="text-sm font-semibold text-[#414f63]">Forma de pagamento</p>
                                                 </div>
                                             </div>
