@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/authContext";
 import { LuUser, LuLogOut } from "react-icons/lu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LuArrowLeftRight } from "react-icons/lu";
 
 
 export function Sidebar() {
@@ -30,9 +31,22 @@ export function Sidebar() {
                 <nav>
                     <ul className="flex flex-col pt-6 ml-3 gap-2">
                         <li>
-                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                            <button 
+                                className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md"
+                                onClick={() => navigate("/dashboard")}
+                            >
                                 <FaChartPie size={20} className="text-[#10B981]"/>
                                 <p className="text-white">Dashboard</p>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button 
+                                className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md"
+                                onClick={() => navigate("/transactions")}
+                            >
+                                <LuArrowLeftRight size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Transações</p>
                             </button>
                         </li>
 

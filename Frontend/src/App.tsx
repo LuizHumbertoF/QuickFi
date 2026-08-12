@@ -3,6 +3,8 @@ import { LandingPage } from './pages/landingPage/LandingPage'
 import { LoginPage } from "./pages/login/LoginPage";
 import { RegisterPage } from "./pages/register/RegisterPage";
 import { Dashboard } from "./pages/dashboard/Dashboard";
+import { Transactions } from "./pages/transactions/Transactions";
+import { NewTransaction } from "./pages/transactions/NewTransaction";
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/transactions" element={<Transactions />} />
+        <Route path="/transactions/newTransaction" element={<NewTransaction />} />
       </Routes>
     </BrowserRouter>
   )
