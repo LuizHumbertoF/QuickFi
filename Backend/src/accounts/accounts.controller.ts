@@ -10,6 +10,12 @@ export class AccountsController {
     constructor(private accountService: AccountsService) {}
 
     @UseGuards(JwtAuthGuard)
+    @Get() 
+    getAccounts(@Request() req: any) {
+        return this.accountService.getAccounts(req.user.id);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('newAccount')
     newAccount(@Body() data: CreateAccountDto, @Request() req: any) {
         

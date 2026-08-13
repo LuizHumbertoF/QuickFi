@@ -1,7 +1,7 @@
 import { Sidebar } from "../sidebar/Sidebar"
-import { LuCircleHelp, LuSparkles, LuArrowLeft, LuLandmark, LuChevronDown, LuEllipsis, LuPiggyBank, LuWallet, LuChartNoAxesCombined, LuSmartphone, LuBadgeDollarSign } from "react-icons/lu"
+import { LuCircleHelp, LuBookmark, LuArrowLeft, LuLandmark, LuChevronDown, LuEllipsis, LuPiggyBank, LuWallet, LuChartNoAxesCombined, LuSmartphone, LuBadgeDollarSign } from "react-icons/lu"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PostUserAccount } from "@/controllers/postUserAccount";
 import { useAuth } from "@/contexts/authContext";
 
@@ -53,8 +53,11 @@ export function NewAccount() {
 
             if(response.status === 201) {
                 alert("Conta criada com sucesso!");
-                return;
+
+                navigate("/accounts");
             }
+
+
         }
     }
 
@@ -127,7 +130,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 py-3 border-[#94A3B8] w-full shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Salário");
+                                                            setAccountType("Corrente");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -138,7 +141,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Trabalho");
+                                                            setAccountType("Poupança");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -149,7 +152,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Investimentos");
+                                                            setAccountType("Carteira");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -160,7 +163,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Moradia");
+                                                            setAccountType("Investimento");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -171,7 +174,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Alimentação");
+                                                            setAccountType("Digital");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -182,7 +185,7 @@ export function NewAccount() {
                                                     <button 
                                                         className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
                                                         onClick={() => {
-                                                            setAccountType("Transporte");
+                                                            setAccountType("Salário");
                                                             setOpenedTypeAccount(false);
                                                         }}
                                                     >
@@ -223,17 +226,17 @@ export function NewAccount() {
                                         <p className="text-sm font-semibold text-[#414f63]">Cor da conta</p>
                                         <div className="flex gap-8">
                                             <div className ={`transition-all duration-200 hover:-translate-y-1 flex items-center justify-center w-8 h-8 rounded-full border-2 p-0.5 ` + (
-                                                accountColor === 'green' ? "border-[#10B981] animate-in zoom-in duration-300" : "border-[#E2E8F0]"
+                                                accountColor === 'green' ? "border-green-500 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
                                             )}>
-                                                <button className="cursor-pointer w-full h-full rounded-full bg-[#10B981]" 
+                                                <button className="cursor-pointer w-full h-full rounded-full bg-green-500" 
                                                     onClick={() => setAccountColor("green")}
                                                 />
                                             </div>
 
                                             <div className ={`transition-all duration-200 hover:-translate-y-1 flex items-center justify-center w-8 h-8 rounded-full border-2 p-0.5 ` + (
-                                                accountColor === 'purple' ? "border-purple-600 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
+                                                accountColor === 'purple' ? "border-purple-500 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
                                             )}>
-                                                <button className="cursor-pointer w-full h-full rounded-full bg-purple-600" 
+                                                <button className="cursor-pointer w-full h-full rounded-full bg-purple-500" 
                                                     onClick={() => setAccountColor("purple")}
                                                 />
                                             </div>
@@ -247,27 +250,27 @@ export function NewAccount() {
                                             </div>
 
                                             <div className ={`transition-all duration-200 hover:-translate-y-1 flex items-center justify-center w-8 h-8 rounded-full border-2 p-0.5 ` + (
-                                                accountColor === 'blue' ? "border-blue-600 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
+                                                accountColor === 'blue' ? "border-blue-500 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
                                             )}>
-                                                <button className="cursor-pointer w-full h-full rounded-full bg-blue-600" 
+                                                <button className="cursor-pointer w-full h-full rounded-full bg-blue-500" 
                                                     onClick={() => setAccountColor("blue")}
                                                 />
                                             </div>
 
                                             <div className ={`transition-all duration-200 hover:-translate-y-1 flex items-center justify-center w-8 h-8 rounded-full border-2 p-0.5 ` + (
-                                                accountColor === 'pink' ? "border-pink-600 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
+                                                accountColor === 'pink' ? "border-pink-500 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
                                             )}>
-                                                <button className="cursor-pointer w-full h-full rounded-full bg-pink-600"
+                                                <button className="cursor-pointer w-full h-full rounded-full bg-pink-500"
                                                     onClick={() => setAccountColor("pink")}
                                                 />
                                             </div>
 
                                             <div className ={`transition-all duration-200 hover:-translate-y-1 flex items-center justify-center w-8 h-8 rounded-full border-2 p-0.5 ` + (
-                                                accountColor === 'cyan' ? "border-cyan-400 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
+                                                accountColor === 'red' ? "border-red-500 animate-in zoom-in duration-300" : "border-[#E2E8F0]"
                                             )}>
                                                 <button 
-                                                    className="cursor-pointer w-full h-full rounded-full bg-cyan-400"
-                                                    onClick={() => setAccountColor("cyan")}
+                                                    className="cursor-pointer w-full h-full rounded-full bg-red-500"
+                                                    onClick={() => setAccountColor("red")}
                                                 />
                                             </div>
 
@@ -328,7 +331,7 @@ export function NewAccount() {
                                     <div className=" border border-[#10B981]/20 bg-white rounded-lg">
                                         <div className="bg-[#10B981]/10 flex justify-center rounded-lg gap-3 p-3">
             
-                                            <LuSparkles className="w-10 h-10 text-[#10B981]"/>
+                                            <LuBookmark className="w-7 h-7 text-[#10B981]"/>
                                             <div className="flex flex-col p-1">
                                                 <h5 className="font-semibold">Importante</h5>
                                                 <p className="text-[#414f63] text-sm">As informações da sua conta são mantidas em segurança e nunca serão compartilhadas.</p>

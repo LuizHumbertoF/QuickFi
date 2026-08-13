@@ -6,6 +6,17 @@ import { CreateAccountDto } from "./dto/createAccount.dto.js";
 export class AccountsService {
     constructor(private prisma: PrismaService) {}
 
+    async getAccounts(userId: number) {
+
+        const accounts = await this.prisma.account.findMany({
+            where: {
+                userId: userId
+            }
+        });
+
+        return accounts;
+    }
+
     async createAccount(data: CreateAccountDto, userId: number) {
 
         const account = await this.prisma.account.findFirst({

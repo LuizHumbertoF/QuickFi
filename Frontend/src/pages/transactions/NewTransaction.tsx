@@ -2,7 +2,7 @@ import { Sidebar } from "../sidebar/Sidebar"
 import { LuCircleHelp } from "react-icons/lu";
 import { LuArrowLeft } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LuTrendingUp } from "react-icons/lu";
 import { LuTrendingDown } from "react-icons/lu";
 import { LuChevronDown } from "react-icons/lu";
@@ -12,6 +12,11 @@ import { LuCalendar } from "react-icons/lu";
 import { LuSparkles   } from "react-icons/lu";
 import { LuTags } from "react-icons/lu";
 import { LuBriefcaseBusiness, LuBadgeDollarSign, LuChartNoAxesCombined, LuHouse, LuUtensils, LuCar, LuGamepad2, LuShoppingBag, LuEllipsis  } from "react-icons/lu";
+import type { Account } from "../accounts/Accounts";
+import { useAuth } from "@/contexts/authContext";
+import { GetUserAccounts } from "@/controllers/getUserAccounts";
+
+const getUserAccounts = new GetUserAccounts();
 
 export function NewTransaction() {
     const MAX_AMOUNT = 9999999; // R$ 99.999,99 em centavos
@@ -23,7 +28,11 @@ export function NewTransaction() {
     const [ transactionDate, setTransactionDate ] = useState("");
     const [ transactionCategory, setTransactionCategory ] = useState<string | undefined>(undefined);
     const [ openedCategoryModal, setOpenedCategoryModal ] = useState<boolean>(false);
+    const [accounts, setAccounts] = useState<Account[]>([]);
+    const [chosenAccount, setChosenAccount ] = useState<string>("");
+    const [ openedAccountModal, setOpenedAccountModal ] = useState<boolean>(false);
     const navigate = useNavigate();
+    const { token } = useAuth();
 
     const handleAmountChange = (value: string) => {
         const numbers = value.replace(/\D/g, "");
@@ -42,6 +51,20 @@ export function NewTransaction() {
 
         return new Date(date + "T00:00:00").toLocaleDateString("pt-BR");
     };
+
+    useEffect(() => {
+        if (!token) return;
+
+        const loadAccounts = async () => {
+            const response = await getUserAccounts.execute(token);
+            setAccounts(response.data);
+        };
+
+        loadAccounts();
+
+        console.log("accounts new transactions: ", accounts);
+
+    }, [token]);
 
     return (
 
@@ -307,7 +330,7 @@ export function NewTransaction() {
                                                 </button>
 
                                                 <button 
-                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b px-4 border-[#94A3B8] w-full py-3 shrink-0 flex items-center"
+                                                    className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer px-4 w-full py-3 shrink-0 flex items-center"
                                                     onClick={() => {
                                                         setTransactionCategory("Outro");
                                                         setOpenedCategoryModal(false);
@@ -328,13 +351,40 @@ export function NewTransaction() {
                                     <p className="text-sm font-semibold text-[#414f63]">Conta</p>
                                     <button 
                                         className=" gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        onClick={() => setOpenedAccountModal(!openedAccountModal)}
                                     >
                                         <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
                                         Selecione uma conta
                                         <div className="ml-auto">
-                                            <LuChevronDown/>
+                                            <LuChevronDown className={`transition-transform duration-200 ${
+                                                openedAccountModal ? "rotate-180" : "rotate-0"
+                                            }`}/>
                                         </div>
                                     </button>
+
+                                    {openedAccountModal && (
+                                        <div className="fixed z-50 mt-16 flex flex-col items-center rounded-md shadow-md border border-[#E2E8F0] bg-white w-1/5 max-h-42 overflow-y-auto">
+
+                                            {accounts.map((account, index) => (
+                                                <button
+                                                    key={account.id}
+                                                    className={`gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer px-4 py-3 w-full shrink-0 flex items-center
+                                                        ${index !== accounts.length - 1 ? "border-b border-[#94A3B8]" : ""}`}
+                                                    onClick={() => {
+                                                        setChosenAccount(account.name);
+                                                        setOpenedAccountModal(false);
+                                                    }}
+                                                >
+                                                    <div
+                                                        className={`w-3 h-3 rounded-md bg-${account.color}-500`}
+                                                    />
+
+                                                    {account.name}
+                                                </button>
+                                            ))}
+
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             
