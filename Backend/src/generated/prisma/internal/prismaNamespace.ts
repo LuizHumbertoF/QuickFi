@@ -773,7 +773,10 @@ export const AccountScalarFieldEnum = {
   userId: 'userId',
   name: 'name',
   type: 'type',
-  balance: 'balance',
+  institution: 'institution',
+  color: 'color',
+  amount: 'amount',
+  active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

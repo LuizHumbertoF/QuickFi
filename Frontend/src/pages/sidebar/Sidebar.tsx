@@ -48,7 +48,10 @@ export function Sidebar() {
                         </li>
 
                         <li>
-                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
+                            <button 
+                                className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md"
+                                onClick={() => navigate("/accounts")}
+                            >
                                 <LuCircleUserRound size={20} className="text-[#10B981]"/>
                                 <p className="text-white">Contas</p>
                             </button>
@@ -82,7 +85,7 @@ export function Sidebar() {
                 <div className="flex flex-col mt-auto">
                     {
                         showLogoutModal ? (
-                            <div className="profile-menu flex flex-col mr-3 rounded-md shadow-md border border-[#94A3B8] ml-auto bg-[#E2E8F0] w-36 h-30">
+                            <div className="profile-menu flex flex-col mr-3 rounded-md shadow-md border border-[#E2E8F0] ml-auto bg-white w-36 h-30">
                                 <button 
                                     className="gap-2 transition-all duration-200 hover:bg-[#94A3B8]/40 cursor-pointer border-b border-[#94A3B8]  p-4 h-1/2 flex items-center"
                                 >

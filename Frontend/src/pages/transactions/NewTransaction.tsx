@@ -461,7 +461,7 @@ export function NewTransaction() {
                         }
 
                         
-                        <div className="border border-[#E2E8F0] bg-white rounded-lg">
+                        <div className="border border-[#10B981]/20 bg-white rounded-lg">
                             <div className="bg-[#10B981]/10 flex justify-center rounded-lg gap-3 p-3">
 
                                 <LuSparkles className="w-10 h-10 text-[#10B981]"/>

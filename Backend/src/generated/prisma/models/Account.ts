@@ -29,13 +29,13 @@ export type AggregateAccount = {
 export type AccountAvgAggregateOutputType = {
   id: number | null
   userId: number | null
-  balance: number | null
+  amount: number | null
 }
 
 export type AccountSumAggregateOutputType = {
   id: number | null
   userId: number | null
-  balance: number | null
+  amount: number | null
 }
 
 export type AccountMinAggregateOutputType = {
@@ -43,7 +43,10 @@ export type AccountMinAggregateOutputType = {
   userId: number | null
   name: string | null
   type: string | null
-  balance: number | null
+  institution: string | null
+  color: string | null
+  amount: number | null
+  active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,7 +56,10 @@ export type AccountMaxAggregateOutputType = {
   userId: number | null
   name: string | null
   type: string | null
-  balance: number | null
+  institution: string | null
+  color: string | null
+  amount: number | null
+  active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,7 +69,10 @@ export type AccountCountAggregateOutputType = {
   userId: number
   name: number
   type: number
-  balance: number
+  institution: number
+  color: number
+  amount: number
+  active: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -73,13 +82,13 @@ export type AccountCountAggregateOutputType = {
 export type AccountAvgAggregateInputType = {
   id?: true
   userId?: true
-  balance?: true
+  amount?: true
 }
 
 export type AccountSumAggregateInputType = {
   id?: true
   userId?: true
-  balance?: true
+  amount?: true
 }
 
 export type AccountMinAggregateInputType = {
@@ -87,7 +96,10 @@ export type AccountMinAggregateInputType = {
   userId?: true
   name?: true
   type?: true
-  balance?: true
+  institution?: true
+  color?: true
+  amount?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -97,7 +109,10 @@ export type AccountMaxAggregateInputType = {
   userId?: true
   name?: true
   type?: true
-  balance?: true
+  institution?: true
+  color?: true
+  amount?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,7 +122,10 @@ export type AccountCountAggregateInputType = {
   userId?: true
   name?: true
   type?: true
-  balance?: true
+  institution?: true
+  color?: true
+  amount?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -204,7 +222,10 @@ export type AccountGroupByOutputType = {
   userId: number
   name: string
   type: string
-  balance: number
+  institution: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt: Date
   updatedAt: Date
   _count: AccountCountAggregateOutputType | null
@@ -237,7 +258,10 @@ export type AccountWhereInput = {
   userId?: Prisma.IntFilter<"Account"> | number
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.StringFilter<"Account"> | string
-  balance?: Prisma.IntFilter<"Account"> | number
+  institution?: Prisma.StringNullableFilter<"Account"> | string | null
+  color?: Prisma.StringFilter<"Account"> | string
+  amount?: Prisma.IntFilter<"Account"> | number
+  active?: Prisma.BoolFilter<"Account"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
@@ -249,7 +273,10 @@ export type AccountOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  institution?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
@@ -258,25 +285,32 @@ export type AccountOrderByWithRelationInput = {
 
 export type AccountWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId_name?: Prisma.AccountUserIdNameCompoundUniqueInput
   AND?: Prisma.AccountWhereInput | Prisma.AccountWhereInput[]
   OR?: Prisma.AccountWhereInput[]
   NOT?: Prisma.AccountWhereInput | Prisma.AccountWhereInput[]
   userId?: Prisma.IntFilter<"Account"> | number
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.StringFilter<"Account"> | string
-  balance?: Prisma.IntFilter<"Account"> | number
+  institution?: Prisma.StringNullableFilter<"Account"> | string | null
+  color?: Prisma.StringFilter<"Account"> | string
+  amount?: Prisma.IntFilter<"Account"> | number
+  active?: Prisma.BoolFilter<"Account"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "userId_name">
 
 export type AccountOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  institution?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AccountCountOrderByAggregateInput
@@ -294,7 +328,10 @@ export type AccountScalarWhereWithAggregatesInput = {
   userId?: Prisma.IntWithAggregatesFilter<"Account"> | number
   name?: Prisma.StringWithAggregatesFilter<"Account"> | string
   type?: Prisma.StringWithAggregatesFilter<"Account"> | string
-  balance?: Prisma.IntWithAggregatesFilter<"Account"> | number
+  institution?: Prisma.StringNullableWithAggregatesFilter<"Account"> | string | null
+  color?: Prisma.StringWithAggregatesFilter<"Account"> | string
+  amount?: Prisma.IntWithAggregatesFilter<"Account"> | number
+  active?: Prisma.BoolWithAggregatesFilter<"Account"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Account"> | Date | string
 }
@@ -302,7 +339,10 @@ export type AccountScalarWhereWithAggregatesInput = {
 export type AccountCreateInput = {
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
@@ -314,7 +354,10 @@ export type AccountUncheckedCreateInput = {
   userId: number
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
@@ -323,7 +366,10 @@ export type AccountUncheckedCreateInput = {
 export type AccountUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
@@ -335,7 +381,10 @@ export type AccountUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
@@ -346,7 +395,10 @@ export type AccountCreateManyInput = {
   userId: number
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -354,7 +406,10 @@ export type AccountCreateManyInput = {
 export type AccountUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,7 +419,10 @@ export type AccountUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -379,12 +437,20 @@ export type AccountOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type AccountUserIdNameCompoundUniqueInput = {
+  userId: number
+  name: string
+}
+
 export type AccountCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  institution?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -392,7 +458,7 @@ export type AccountCountOrderByAggregateInput = {
 export type AccountAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 export type AccountMaxOrderByAggregateInput = {
@@ -400,7 +466,10 @@ export type AccountMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  institution?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -410,7 +479,10 @@ export type AccountMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  institution?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -418,7 +490,7 @@ export type AccountMinOrderByAggregateInput = {
 export type AccountSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  balance?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 export type AccountScalarRelationFilter = {
@@ -468,6 +540,14 @@ export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.AccountScalarWhereInput | Prisma.AccountScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type AccountCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.AccountCreateWithoutTransactionsInput, Prisma.AccountUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.AccountCreateOrConnectWithoutTransactionsInput
@@ -485,7 +565,10 @@ export type AccountUpdateOneRequiredWithoutTransactionsNestedInput = {
 export type AccountCreateWithoutUserInput = {
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
@@ -495,7 +578,10 @@ export type AccountUncheckedCreateWithoutUserInput = {
   id?: number
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
@@ -535,7 +621,10 @@ export type AccountScalarWhereInput = {
   userId?: Prisma.IntFilter<"Account"> | number
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.StringFilter<"Account"> | string
-  balance?: Prisma.IntFilter<"Account"> | number
+  institution?: Prisma.StringNullableFilter<"Account"> | string | null
+  color?: Prisma.StringFilter<"Account"> | string
+  amount?: Prisma.IntFilter<"Account"> | number
+  active?: Prisma.BoolFilter<"Account"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Account"> | Date | string
 }
@@ -543,7 +632,10 @@ export type AccountScalarWhereInput = {
 export type AccountCreateWithoutTransactionsInput = {
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAccountsInput
@@ -554,7 +646,10 @@ export type AccountUncheckedCreateWithoutTransactionsInput = {
   userId: number
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -578,7 +673,10 @@ export type AccountUpdateToOneWithWhereWithoutTransactionsInput = {
 export type AccountUpdateWithoutTransactionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
@@ -589,7 +687,10 @@ export type AccountUncheckedUpdateWithoutTransactionsInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -598,7 +699,10 @@ export type AccountCreateManyUserInput = {
   id?: number
   name: string
   type: string
-  balance: number
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -606,7 +710,10 @@ export type AccountCreateManyUserInput = {
 export type AccountUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
@@ -616,7 +723,10 @@ export type AccountUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
@@ -626,7 +736,10 @@ export type AccountUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -667,7 +780,10 @@ export type AccountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   userId?: boolean
   name?: boolean
   type?: boolean
-  balance?: boolean
+  institution?: boolean
+  color?: boolean
+  amount?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   transactions?: boolean | Prisma.Account$transactionsArgs<ExtArgs>
@@ -680,7 +796,10 @@ export type AccountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   type?: boolean
-  balance?: boolean
+  institution?: boolean
+  color?: boolean
+  amount?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -691,7 +810,10 @@ export type AccountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   type?: boolean
-  balance?: boolean
+  institution?: boolean
+  color?: boolean
+  amount?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -702,12 +824,15 @@ export type AccountSelectScalar = {
   userId?: boolean
   name?: boolean
   type?: boolean
-  balance?: boolean
+  institution?: boolean
+  color?: boolean
+  amount?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "balance" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+export type AccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "institution" | "color" | "amount" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
 export type AccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Account$transactionsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -731,7 +856,10 @@ export type $AccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     userId: number
     name: string
     type: string
-    balance: number
+    institution: string | null
+    color: string
+    amount: number
+    active: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["account"]>
@@ -1163,7 +1291,10 @@ export interface AccountFieldRefs {
   readonly userId: Prisma.FieldRef<"Account", 'Int'>
   readonly name: Prisma.FieldRef<"Account", 'String'>
   readonly type: Prisma.FieldRef<"Account", 'String'>
-  readonly balance: Prisma.FieldRef<"Account", 'Int'>
+  readonly institution: Prisma.FieldRef<"Account", 'String'>
+  readonly color: Prisma.FieldRef<"Account", 'String'>
+  readonly amount: Prisma.FieldRef<"Account", 'Int'>
+  readonly active: Prisma.FieldRef<"Account", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Account", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Account", 'DateTime'>
 }

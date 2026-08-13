@@ -508,10 +508,6 @@ export type TransactionUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type TransactionCreateNestedManyWithoutCategoryInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput> | Prisma.TransactionCreateWithoutCategoryInput[] | Prisma.TransactionUncheckedCreateWithoutCategoryInput[]
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCategoryInput | Prisma.TransactionCreateOrConnectWithoutCategoryInput[]
