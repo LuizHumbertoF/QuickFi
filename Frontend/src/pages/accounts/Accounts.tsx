@@ -171,12 +171,13 @@ export function Accounts() {
                         <p className="ml-auto mr-60 text-sm font-semibold text-[#7b8491]">Saldo</p>
                     </div>
 
-                    <div className="flex py-6 gap-6 flex-col w-full h-full overflow-y-auto">
+                    <div className="flex flex-col w-full h-full overflow-y-auto">
 
                         {
-                            accounts.map((account) => (
+                            accounts.map((account, index) => (
 
-                                <div className="flex w-full items-center gap-6">
+                                <div className={`flex w-full items-center gap-6 py-3.5 
+                                    ${index !== accounts.length - 1 ? "border-b border-b-[#7b8491]/30" : ""}`}>
                                     <div className={`bg-${account.color}-500 w-6 h-6 rounded-md`}/>
                                     <div className="flex flex-col">
                                         <p className="text-sm font-semibold ">{account.name}</p>
