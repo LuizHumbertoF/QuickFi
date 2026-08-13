@@ -20,15 +20,6 @@ export function NewAccount() {
     const [accountAmount, setAccountAmount] = useState<number | undefined>(undefined);
 
     const { token } = useAuth();
-    let updatedToken: string | null = "";
-
-    useEffect(() => {
-        
-        if(token) {
-            updatedToken = localStorage.getItem(token);
-        }
-
-    }, [token]);
 
     const handleAmountChange = (value: string) => {
         const numbers = value.replace(/\D/g, "");
@@ -49,9 +40,9 @@ export function NewAccount() {
             return;
         }
 
-        if(updatedToken) {
+        if(token) {
             
-            const response = await postUserAccount.execute(updatedToken, 
+            const response = await postUserAccount.execute(token, 
                 accountName, 
                 accountType, 
                 accountColor, 
