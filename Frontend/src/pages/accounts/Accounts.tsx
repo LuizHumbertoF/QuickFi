@@ -115,7 +115,7 @@ export function Accounts() {
                 <div className="flex w-full h-32 ">
                     
                     <div className="flex w-full h-full gap-5">
-                        <div className="bg-gray-200/10 border rounded-lg shadow-xs border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
                                 <div className="flex items-center justify-center bg-[#10B981]/10 rounded-md w-1/2 h-1/2">
                                     <LuPiggyBank className="text-[#10B981] h-6 w-6"/>
@@ -132,7 +132,7 @@ export function Accounts() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-200/10 border rounded-lg shadow-xs border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
                                 <div className="flex items-center justify-center bg-purple-600/10 rounded-md w-1/2 h-1/2">
                                     <LuCircleUserRound className="text-purple-600 h-6 w-6"/>
@@ -145,7 +145,7 @@ export function Accounts() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-200/10 border rounded-lg shadow-xs border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
                                 <div className="flex items-center justify-center bg-yellow-500/10 rounded-md w-1/2 h-1/2">
                                     <LuCircleDollarSign className="text-yellow-500 h-6 w-6"/>
