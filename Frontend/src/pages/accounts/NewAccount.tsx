@@ -62,20 +62,22 @@ export function NewAccount() {
     }
 
     return (
-        <div className="w-screen h-screen bg-white flex">
+        <div className="w-screen h-screen bg-[#E2E8F0]/40 flex">
                     
                     
-                    <Sidebar/>
-        
-                    <div className="fixed z-50 flex items-center ml-44 mt-10.25 w-25 h-12">
-                        <button 
-                            className="cursor-pointer transition-all duration-200 hover:-translate-y-1 ml-auto mr-1"
-                            onClick={() => navigate("/accounts")}
-                        >
-                            <LuArrowLeft className="w-6 h-6" />
-                        </button>
-                    </div>
-                    <div className="w-full h-full flex flex-col px-12 py-12 gap-8">
+                <Sidebar/>
+    
+                <div className="fixed z-50 flex items-center ml-44 mt-10.25 w-25 h-12">
+                    <button 
+                        className="cursor-pointer transition-all duration-200 hover:-translate-y-1 ml-auto mr-1"
+                        onClick={() => navigate("/accounts")}
+                    >
+                        <LuArrowLeft className="w-6 h-6" />
+                    </button>
+                </div>
+
+                <div className="w-full h-full flex flex-col items-center pt-12"> 
+                    <div className="w-full flex flex-col px-12 gap-8">
         
                         <div className="flex w-full h-16.25 items-center">
                             
@@ -93,8 +95,11 @@ export function NewAccount() {
         
                             </div>
                         </div>
+                    </div>
+
+                    <div className="w-full h-full p-6 flex flex-col">
                         
-                        <div className="flex flex-col gap-6">
+                        <div className="bg-white shadow-md p-6 rounded-lg flex flex-col gap-6">
                             <h2 className="font-semibold">Informações da transação</h2>
 
                             <div className="flex w-full h-full gap-10">
@@ -102,7 +107,7 @@ export function NewAccount() {
                                 <div className="flex flex-col w-1/2 gap-8 h-full">
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Nome da conta</p>
-                                        <input className="w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        <input className="w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md bg-white"
                                             placeholder="Ex: conta principal"
                                             value={accountName}
                                             onChange={(e) => setAccountName(e.target.value)}
@@ -112,7 +117,7 @@ export function NewAccount() {
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Tipo de conta</p>
                                         <button 
-                                            className="w-2/3 gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                            className="bg-white w-2/3 gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                             onClick={() => setOpenedTypeAccount(!openedTypeAccount)}
                                         >   
                                             <LuLandmark className="text-[#10B981] w-4.5 h-4.5"/>
@@ -215,7 +220,7 @@ export function NewAccount() {
                                             <p className="text-sm font-semibold text-[#414f63]">Instituição</p>
                                             <p className="text-sm font-semibold text-[#767f8a]">(Opcional)</p>
                                         </div>
-                                        <input className="w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        <input className="bg-white w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                             placeholder="Ex: Nubank, Inter, Caixa..."
                                             value={InstitutionAccount}
                                             onChange={(e) => setInstitutionAccount(e.target.value)}
@@ -291,7 +296,7 @@ export function NewAccount() {
                                 <div className="flex flex-col w-1/2 gap-8">
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Saldo inicial</p>
-                                        <input className="h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        <input className="bg-white h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
                                             placeholder="R$ 0,00"
                                             value={
                                                 accountAmount
@@ -361,7 +366,7 @@ export function NewAccount() {
                             </div>
                         </div>
                     </div>
-                    
+                </div>  
         </div>
     )
 }

@@ -16,7 +16,7 @@ export function Sidebar() {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col w-70 h-full bg-[#0F172A]">
+        <div className="flex flex-col w-70 h-full bg-[#0F172A] shadow-lg">
             <div className="pt-5 pl-5">
                 <BasicLogoText
                     white={true}

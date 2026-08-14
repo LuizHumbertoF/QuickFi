@@ -15,8 +15,10 @@ import { LuBriefcaseBusiness, LuBadgeDollarSign, LuChartNoAxesCombined, LuHouse,
 import type { Account } from "../accounts/Accounts";
 import { useAuth } from "@/contexts/authContext";
 import { GetUserAccounts } from "@/controllers/getUserAccounts";
+import { PostUserTransaction } from "@/controllers/postUserTransaction";
 
 const getUserAccounts = new GetUserAccounts();
+const postUserTransaction = new PostUserTransaction();
 
 export function NewTransaction() {
     const MAX_AMOUNT = 9999999; // R$ 99.999,99 em centavos
@@ -26,13 +28,51 @@ export function NewTransaction() {
     const [amount, setAmount] = useState<number>(0);
     const [ transactionDescription, setTransactionDescription ] = useState<string>("");
     const [ transactionDate, setTransactionDate ] = useState("");
-    const [ transactionCategory, setTransactionCategory ] = useState<string | undefined>(undefined);
+    const [ transactionCategory, setTransactionCategory ] = useState<string>("");
     const [ openedCategoryModal, setOpenedCategoryModal ] = useState<boolean>(false);
     const [accounts, setAccounts] = useState<Account[]>([]);
     const [chosenAccount, setChosenAccount ] = useState<string>("");
     const [ openedAccountModal, setOpenedAccountModal ] = useState<boolean>(false);
+    const [ paymentType, setPaymentType ] = useState<string | undefined>(undefined);
     const navigate = useNavigate();
     const { token } = useAuth();
+
+    async function handleSaveTransaction() {
+
+        if(!amount 
+            || !transactionDescription 
+            || !transactionDate  
+            || !transactionCategory 
+            || !transactionType 
+            || !chosenAccount
+        ) {
+
+            alert("Campos obrigatórios inválidos.");
+            return;
+        }
+
+        if(token) {
+
+            const response = await postUserTransaction.execute(token, 
+                amount, 
+                transactionDescription,
+                transactionDate,
+                transactionCategory,
+                chosenAccount,
+                transactionType,
+                paymentType,
+                recurrentTransaction
+            )
+
+            if(response.status === 201) {
+
+                alert("Transação criada com sucesso!")
+
+                navigate("/transactions");
+            }
+        }
+
+    }
 
     const handleAmountChange = (value: string) => {
         const numbers = value.replace(/\D/g, "");
@@ -101,7 +141,7 @@ export function NewTransaction() {
                 </div>
 
                 <div className="flex gap-6 h-full w-full">
-                    <div className="bg-white gap-3 border flex flex-col shadow-xs border-[#E2E8F0] rounded-lg p-5 w-4/6">
+                    <div className="bg-white gap-3 border flex flex-col shadow-lg border-[#E2E8F0] rounded-lg p-5 w-4/6">
                         <div className="flex mb-3">
                             <h2 className="font-semibold">Informações da transação</h2>
                             <div className="flex ml-auto gap-2">
@@ -354,7 +394,7 @@ export function NewTransaction() {
                                         onClick={() => setOpenedAccountModal(!openedAccountModal)}
                                     >
                                         <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
-                                        Selecione uma conta
+                                        {chosenAccount ? chosenAccount : "Selecione uma conta"}
                                         <div className="ml-auto">
                                             <LuChevronDown className={`transition-transform duration-200 ${
                                                 openedAccountModal ? "rotate-180" : "rotate-0"
@@ -407,7 +447,10 @@ export function NewTransaction() {
                                     Cancelar
                                 </button>
 
-                                <button className="cursor-pointer transition-all duration-200 hover:-translate-y-1 bg-[#10B981] py-2 px-6 text-white rounded-lg shadow-md">
+                                <button 
+                                    className="cursor-pointer transition-all duration-200 hover:-translate-y-1 bg-[#10B981] py-2 px-6 text-white rounded-lg shadow-md"
+                                    onClick={() => handleSaveTransaction()}
+                                >
                                     Salvar transação
                                 </button>
                             </div>
@@ -421,7 +464,7 @@ export function NewTransaction() {
                                 (
                                     transactionType === "receita" ?
                                         (
-                                            <div className=" bg-white border shadow-xs border-[#E2E8F0] gap-7 rounded-lg p-6 flex flex-col ">
+                                            <div className=" bg-white border shadow-lg border-[#E2E8F0] gap-7 rounded-lg p-6 flex flex-col ">
                                                 <h3 className="font-semibold">Resumo da transação</h3>
 
                                                 <div className="mt-2 flex flex-col items-center">
@@ -454,6 +497,7 @@ export function NewTransaction() {
                                                 <div className="flex gap-2">
                                                     <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Conta</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{chosenAccount}</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
@@ -464,7 +508,7 @@ export function NewTransaction() {
                                         )
                                         :
                                         (
-                                            <div className="bg-white border shadow-xs border-[#E2E8F0] gap-7 rounded-lg p-6 flex flex-col">
+                                            <div className="bg-white border shadow-lg border-[#E2E8F0] gap-7 rounded-lg p-6 flex flex-col">
                                                 <h3 className="font-semibold">Resumo da despesa</h3>
 
                                                 <div className="mt-2 flex flex-col items-center">
@@ -496,6 +540,7 @@ export function NewTransaction() {
                                                 <div className="flex gap-2">
                                                     <MdOutlineAccountBalanceWallet className="text-[#10B981] w-4.5 h-4.5"/>
                                                     <p className="text-sm font-semibold text-[#414f63]">Conta</p>
+                                                    <p className="text-sm font-semibold text-[#414f63] ml-auto">{chosenAccount}</p>
                                                 </div>
 
                                                 <div className="flex gap-2">
@@ -511,7 +556,7 @@ export function NewTransaction() {
                         }
 
                         
-                        <div className="border border-[#10B981]/20 bg-white rounded-lg">
+                        <div className="border border-[#10B981]/20 bg-white rounded-lg shadow-lg">
                             <div className="bg-[#10B981]/10 flex justify-center rounded-lg gap-3 p-3">
 
                                 <LuSparkles className="w-10 h-10 text-[#10B981]"/>

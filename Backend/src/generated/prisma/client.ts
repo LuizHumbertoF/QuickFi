@@ -56,8 +56,3 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Transaction = Prisma.TransactionModel
-/**
- * Model Category
- * 
- */
-export type Category = Prisma.CategoryModel

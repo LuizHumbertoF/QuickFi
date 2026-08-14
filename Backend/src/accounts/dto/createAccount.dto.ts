@@ -12,7 +12,7 @@ export class CreateAccountDto {
     color!: string;
 
     @IsNumber()
-    amount!: string;
+    amount!: number;
 
     @IsBoolean()
     active!: boolean;

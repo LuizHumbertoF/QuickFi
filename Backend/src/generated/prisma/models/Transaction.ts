@@ -29,25 +29,25 @@ export type AggregateTransaction = {
 export type TransactionAvgAggregateOutputType = {
   id: number | null
   accountId: number | null
-  categoryId: number | null
   amount: number | null
 }
 
 export type TransactionSumAggregateOutputType = {
   id: number | null
   accountId: number | null
-  categoryId: number | null
   amount: number | null
 }
 
 export type TransactionMinAggregateOutputType = {
   id: number | null
   accountId: number | null
-  categoryId: number | null
+  category: string | null
   type: string | null
   amount: number | null
   description: string | null
-  transactionDate: Date | null
+  transactionDate: string | null
+  paymentType: string | null
+  recurrentTransaction: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -55,11 +55,13 @@ export type TransactionMinAggregateOutputType = {
 export type TransactionMaxAggregateOutputType = {
   id: number | null
   accountId: number | null
-  categoryId: number | null
+  category: string | null
   type: string | null
   amount: number | null
   description: string | null
-  transactionDate: Date | null
+  transactionDate: string | null
+  paymentType: string | null
+  recurrentTransaction: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -67,11 +69,13 @@ export type TransactionMaxAggregateOutputType = {
 export type TransactionCountAggregateOutputType = {
   id: number
   accountId: number
-  categoryId: number
+  category: number
   type: number
   amount: number
   description: number
   transactionDate: number
+  paymentType: number
+  recurrentTransaction: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -81,25 +85,25 @@ export type TransactionCountAggregateOutputType = {
 export type TransactionAvgAggregateInputType = {
   id?: true
   accountId?: true
-  categoryId?: true
   amount?: true
 }
 
 export type TransactionSumAggregateInputType = {
   id?: true
   accountId?: true
-  categoryId?: true
   amount?: true
 }
 
 export type TransactionMinAggregateInputType = {
   id?: true
   accountId?: true
-  categoryId?: true
+  category?: true
   type?: true
   amount?: true
   description?: true
   transactionDate?: true
+  paymentType?: true
+  recurrentTransaction?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,11 +111,13 @@ export type TransactionMinAggregateInputType = {
 export type TransactionMaxAggregateInputType = {
   id?: true
   accountId?: true
-  categoryId?: true
+  category?: true
   type?: true
   amount?: true
   description?: true
   transactionDate?: true
+  paymentType?: true
+  recurrentTransaction?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,11 +125,13 @@ export type TransactionMaxAggregateInputType = {
 export type TransactionCountAggregateInputType = {
   id?: true
   accountId?: true
-  categoryId?: true
+  category?: true
   type?: true
   amount?: true
   description?: true
   transactionDate?: true
+  paymentType?: true
+  recurrentTransaction?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -218,11 +226,13 @@ export type TransactionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type TransactionGroupByOutputType = {
   id: number
   accountId: number
-  categoryId: number
+  category: string
   type: string
   amount: number
-  description: string | null
-  transactionDate: Date
+  description: string
+  transactionDate: string
+  paymentType: string | null
+  recurrentTransaction: boolean
   createdAt: Date
   updatedAt: Date
   _count: TransactionCountAggregateOutputType | null
@@ -253,29 +263,31 @@ export type TransactionWhereInput = {
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   id?: Prisma.IntFilter<"Transaction"> | number
   accountId?: Prisma.IntFilter<"Transaction"> | number
-  categoryId?: Prisma.IntFilter<"Transaction"> | number
+  category?: Prisma.StringFilter<"Transaction"> | string
   type?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.IntFilter<"Transaction"> | number
-  description?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  transactionDate?: Prisma.DateTimeFilter<"Transaction"> | Date | string
+  description?: Prisma.StringFilter<"Transaction"> | string
+  transactionDate?: Prisma.StringFilter<"Transaction"> | string
+  paymentType?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  recurrentTransaction?: Prisma.BoolFilter<"Transaction"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   account?: Prisma.XOR<Prisma.AccountScalarRelationFilter, Prisma.AccountWhereInput>
-  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }
 
 export type TransactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
+  paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
+  recurrentTransaction?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   account?: Prisma.AccountOrderByWithRelationInput
-  category?: Prisma.CategoryOrderByWithRelationInput
 }
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -284,25 +296,28 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   accountId?: Prisma.IntFilter<"Transaction"> | number
-  categoryId?: Prisma.IntFilter<"Transaction"> | number
+  category?: Prisma.StringFilter<"Transaction"> | string
   type?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.IntFilter<"Transaction"> | number
-  description?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  transactionDate?: Prisma.DateTimeFilter<"Transaction"> | Date | string
+  description?: Prisma.StringFilter<"Transaction"> | string
+  transactionDate?: Prisma.StringFilter<"Transaction"> | string
+  paymentType?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  recurrentTransaction?: Prisma.BoolFilter<"Transaction"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   account?: Prisma.XOR<Prisma.AccountScalarRelationFilter, Prisma.AccountWhereInput>
-  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }, "id">
 
 export type TransactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
+  paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
+  recurrentTransaction?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TransactionCountOrderByAggregateInput
@@ -318,57 +333,67 @@ export type TransactionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TransactionScalarWhereWithAggregatesInput | Prisma.TransactionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
   accountId?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
-  categoryId?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
+  category?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   type?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   amount?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
-  description?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
-  transactionDate?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
+  description?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
+  transactionDate?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
+  paymentType?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  recurrentTransaction?: Prisma.BoolWithAggregatesFilter<"Transaction"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
 }
 
 export type TransactionCreateInput = {
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   account: Prisma.AccountCreateNestedOneWithoutTransactionsInput
-  category: Prisma.CategoryCreateNestedOneWithoutTransactionsInput
 }
 
 export type TransactionUncheckedCreateInput = {
   id?: number
   accountId: number
-  categoryId: number
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TransactionUpdateInput = {
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountUpdateOneRequiredWithoutTransactionsNestedInput
-  category?: Prisma.CategoryUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
 export type TransactionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   accountId?: Prisma.IntFieldUpdateOperationsInput | number
-  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -376,20 +401,25 @@ export type TransactionUncheckedUpdateInput = {
 export type TransactionCreateManyInput = {
   id?: number
   accountId: number
-  categoryId: number
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TransactionUpdateManyMutationInput = {
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -397,11 +427,13 @@ export type TransactionUpdateManyMutationInput = {
 export type TransactionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   accountId?: Prisma.IntFieldUpdateOperationsInput | number
-  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,11 +451,13 @@ export type TransactionOrderByRelationAggregateInput = {
 export type TransactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
+  paymentType?: Prisma.SortOrder
+  recurrentTransaction?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -431,18 +465,19 @@ export type TransactionCountOrderByAggregateInput = {
 export type TransactionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
 export type TransactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
+  paymentType?: Prisma.SortOrder
+  recurrentTransaction?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,11 +485,13 @@ export type TransactionMaxOrderByAggregateInput = {
 export type TransactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
+  paymentType?: Prisma.SortOrder
+  recurrentTransaction?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -462,7 +499,6 @@ export type TransactionMinOrderByAggregateInput = {
 export type TransactionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -508,65 +544,27 @@ export type TransactionUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
-export type TransactionCreateNestedManyWithoutCategoryInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput> | Prisma.TransactionCreateWithoutCategoryInput[] | Prisma.TransactionUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCategoryInput | Prisma.TransactionCreateOrConnectWithoutCategoryInput[]
-  createMany?: Prisma.TransactionCreateManyCategoryInputEnvelope
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-}
-
-export type TransactionUncheckedCreateNestedManyWithoutCategoryInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput> | Prisma.TransactionCreateWithoutCategoryInput[] | Prisma.TransactionUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCategoryInput | Prisma.TransactionCreateOrConnectWithoutCategoryInput[]
-  createMany?: Prisma.TransactionCreateManyCategoryInputEnvelope
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-}
-
-export type TransactionUpdateManyWithoutCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput> | Prisma.TransactionCreateWithoutCategoryInput[] | Prisma.TransactionUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCategoryInput | Prisma.TransactionCreateOrConnectWithoutCategoryInput[]
-  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutCategoryInput | Prisma.TransactionUpsertWithWhereUniqueWithoutCategoryInput[]
-  createMany?: Prisma.TransactionCreateManyCategoryInputEnvelope
-  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutCategoryInput | Prisma.TransactionUpdateWithWhereUniqueWithoutCategoryInput[]
-  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutCategoryInput | Prisma.TransactionUpdateManyWithWhereWithoutCategoryInput[]
-  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-}
-
-export type TransactionUncheckedUpdateManyWithoutCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput> | Prisma.TransactionCreateWithoutCategoryInput[] | Prisma.TransactionUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCategoryInput | Prisma.TransactionCreateOrConnectWithoutCategoryInput[]
-  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutCategoryInput | Prisma.TransactionUpsertWithWhereUniqueWithoutCategoryInput[]
-  createMany?: Prisma.TransactionCreateManyCategoryInputEnvelope
-  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutCategoryInput | Prisma.TransactionUpdateWithWhereUniqueWithoutCategoryInput[]
-  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutCategoryInput | Prisma.TransactionUpdateManyWithWhereWithoutCategoryInput[]
-  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-}
-
 export type TransactionCreateWithoutAccountInput = {
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  category: Prisma.CategoryCreateNestedOneWithoutTransactionsInput
 }
 
 export type TransactionUncheckedCreateWithoutAccountInput = {
   id?: number
-  categoryId: number
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -603,144 +601,64 @@ export type TransactionScalarWhereInput = {
   NOT?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
   id?: Prisma.IntFilter<"Transaction"> | number
   accountId?: Prisma.IntFilter<"Transaction"> | number
-  categoryId?: Prisma.IntFilter<"Transaction"> | number
+  category?: Prisma.StringFilter<"Transaction"> | string
   type?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.IntFilter<"Transaction"> | number
-  description?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  transactionDate?: Prisma.DateTimeFilter<"Transaction"> | Date | string
+  description?: Prisma.StringFilter<"Transaction"> | string
+  transactionDate?: Prisma.StringFilter<"Transaction"> | string
+  paymentType?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  recurrentTransaction?: Prisma.BoolFilter<"Transaction"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
 }
 
-export type TransactionCreateWithoutCategoryInput = {
-  type: string
-  amount: number
-  description?: string | null
-  transactionDate?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account: Prisma.AccountCreateNestedOneWithoutTransactionsInput
-}
-
-export type TransactionUncheckedCreateWithoutCategoryInput = {
-  id?: number
-  accountId: number
-  type: string
-  amount: number
-  description?: string | null
-  transactionDate?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type TransactionCreateOrConnectWithoutCategoryInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput>
-}
-
-export type TransactionCreateManyCategoryInputEnvelope = {
-  data: Prisma.TransactionCreateManyCategoryInput | Prisma.TransactionCreateManyCategoryInput[]
-  skipDuplicates?: boolean
-}
-
-export type TransactionUpsertWithWhereUniqueWithoutCategoryInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  update: Prisma.XOR<Prisma.TransactionUpdateWithoutCategoryInput, Prisma.TransactionUncheckedUpdateWithoutCategoryInput>
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutCategoryInput, Prisma.TransactionUncheckedCreateWithoutCategoryInput>
-}
-
-export type TransactionUpdateWithWhereUniqueWithoutCategoryInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  data: Prisma.XOR<Prisma.TransactionUpdateWithoutCategoryInput, Prisma.TransactionUncheckedUpdateWithoutCategoryInput>
-}
-
-export type TransactionUpdateManyWithWhereWithoutCategoryInput = {
-  where: Prisma.TransactionScalarWhereInput
-  data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutCategoryInput>
-}
-
 export type TransactionCreateManyAccountInput = {
   id?: number
-  categoryId: number
+  category: string
   type: string
   amount: number
-  description?: string | null
-  transactionDate?: Date | string
+  description: string
+  transactionDate: string
+  paymentType?: string | null
+  recurrentTransaction: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TransactionUpdateWithoutAccountInput = {
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.CategoryUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TransactionUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type TransactionCreateManyCategoryInput = {
-  id?: number
-  accountId: number
-  type: string
-  amount: number
-  description?: string | null
-  transactionDate?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type TransactionUpdateWithoutCategoryInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneRequiredWithoutTransactionsNestedInput
-}
-
-export type TransactionUncheckedUpdateWithoutCategoryInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  accountId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type TransactionUncheckedUpdateManyWithoutCategoryInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  accountId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  transactionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurrentTransaction?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -750,85 +668,88 @@ export type TransactionUncheckedUpdateManyWithoutCategoryInput = {
 export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   accountId?: boolean
-  categoryId?: boolean
+  category?: boolean
   type?: boolean
   amount?: boolean
   description?: boolean
   transactionDate?: boolean
+  paymentType?: boolean
+  recurrentTransaction?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   accountId?: boolean
-  categoryId?: boolean
+  category?: boolean
   type?: boolean
   amount?: boolean
   description?: boolean
   transactionDate?: boolean
+  paymentType?: boolean
+  recurrentTransaction?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   accountId?: boolean
-  categoryId?: boolean
+  category?: boolean
   type?: boolean
   amount?: boolean
   description?: boolean
   transactionDate?: boolean
+  paymentType?: boolean
+  recurrentTransaction?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectScalar = {
   id?: boolean
   accountId?: boolean
-  categoryId?: boolean
+  category?: boolean
   type?: boolean
   amount?: boolean
   description?: boolean
   transactionDate?: boolean
+  paymentType?: boolean
+  recurrentTransaction?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "accountId" | "categoryId" | "type" | "amount" | "description" | "transactionDate" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
+export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "accountId" | "category" | "type" | "amount" | "description" | "transactionDate" | "paymentType" | "recurrentTransaction" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 
 export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Transaction"
   objects: {
     account: Prisma.$AccountPayload<ExtArgs>
-    category: Prisma.$CategoryPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     accountId: number
-    categoryId: number
+    category: string
     type: string
     amount: number
-    description: string | null
-    transactionDate: Date
+    description: string
+    transactionDate: string
+    paymentType: string | null
+    recurrentTransaction: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["transaction"]>
@@ -1226,7 +1147,6 @@ readonly fields: TransactionFieldRefs;
 export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   account<T extends Prisma.AccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountClient<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1258,11 +1178,13 @@ export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runt
 export interface TransactionFieldRefs {
   readonly id: Prisma.FieldRef<"Transaction", 'Int'>
   readonly accountId: Prisma.FieldRef<"Transaction", 'Int'>
-  readonly categoryId: Prisma.FieldRef<"Transaction", 'Int'>
+  readonly category: Prisma.FieldRef<"Transaction", 'String'>
   readonly type: Prisma.FieldRef<"Transaction", 'String'>
   readonly amount: Prisma.FieldRef<"Transaction", 'Int'>
   readonly description: Prisma.FieldRef<"Transaction", 'String'>
-  readonly transactionDate: Prisma.FieldRef<"Transaction", 'DateTime'>
+  readonly transactionDate: Prisma.FieldRef<"Transaction", 'String'>
+  readonly paymentType: Prisma.FieldRef<"Transaction", 'String'>
+  readonly recurrentTransaction: Prisma.FieldRef<"Transaction", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Transaction", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Transaction", 'DateTime'>
 }

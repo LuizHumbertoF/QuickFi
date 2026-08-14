@@ -3,6 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller.js";
 import { AuthModule } from "./auth/auth.module.js";
 import { AccountsModule } from "./accounts/accounts.module.js";
+import { TransactionsModule } from "./transactions/transactions.module.js";
 
 @Module({
     imports: [
@@ -10,7 +11,8 @@ import { AccountsModule } from "./accounts/accounts.module.js";
             isGlobal: true
         }), 
         AuthModule,
-        AccountsModule
+        AccountsModule,
+        TransactionsModule
     ],
     controllers: [AppController],
     providers: [],

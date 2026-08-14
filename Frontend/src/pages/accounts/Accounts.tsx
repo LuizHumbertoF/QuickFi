@@ -82,7 +82,7 @@ export function Accounts() {
 
     return (
 
-        <div className="w-screen h-screen bg-white flex">
+        <div className="w-screen h-screen bg-[#E2E8F0]/40 flex">
             
             <Sidebar/>
             
@@ -96,7 +96,7 @@ export function Accounts() {
 
                     <div className="flex items-center justify-center h-12 ml-auto">
                         
-                        <button className="cursor-pointer transition-all duration-200 hover:-translate-y-1 flex items-center justify-center gap-1 py-2 px-2 rounded-md border shadow-xs border-[#E2E8F0] font-semibold">
+                        <button className="bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 flex items-center justify-center gap-1 py-2 px-2 rounded-md border shadow-lg border-[#E2E8F0] font-semibold">
                             <LuArrowLeftRight className="text-[#475569]" size={20}/>
                             <p className="text-[#475569]">Tranferência</p>
                         </button>
@@ -115,9 +115,9 @@ export function Accounts() {
                 <div className="flex w-full h-32 ">
                     
                     <div className="flex w-full h-full gap-5">
-                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-white border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
-                                <div className="flex items-center justify-center bg-[#10B981]/10 rounded-md w-1/2 h-1/2">
+                                <div className="flex items-center justify-center bg-[#10B981]/10 rounded-md shadow-md w-1/2 h-1/2">
                                     <LuPiggyBank className="text-[#10B981] h-6 w-6"/>
                                 </div>
                             </div>
@@ -132,9 +132,9 @@ export function Accounts() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-white border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
-                                <div className="flex items-center justify-center bg-purple-600/10 rounded-md w-1/2 h-1/2">
+                                <div className="flex items-center justify-center bg-purple-600/10 rounded-md shadow-md w-1/2 h-1/2">
                                     <LuCircleUserRound className="text-purple-600 h-6 w-6"/>
                                 </div>
                             </div>
@@ -145,9 +145,9 @@ export function Accounts() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
+                        <div className="bg-white border rounded-lg shadow-md border-[#94A3B8]/20 w-1/4 flex py-3">
                             <div className="w-1/3 h-full flex justify-center">
-                                <div className="flex items-center justify-center bg-yellow-500/10 rounded-md w-1/2 h-1/2">
+                                <div className="flex items-center justify-center bg-yellow-500/10 rounded-md shadow-md w-1/2 h-1/2">
                                     <LuCircleDollarSign className="text-yellow-500 h-6 w-6"/>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@ export function Accounts() {
 
                 </div>
 
-                <div className="flex-col w-233.5 h-80 p-6 bg-gray-200/10 border rounded-lg shadow-md border-[#94A3B8]/20">
+                <div className="flex-col w-233.5 h-80 p-6 bg-white border rounded-lg shadow-md border-[#94A3B8]/20">
                     <div className="flex w-full">
                         <p className="text-sm font-semibold text-[#7b8491]">Conta</p>
                         <p className="ml-auto mr-60 text-sm font-semibold text-[#7b8491]">Saldo</p>
