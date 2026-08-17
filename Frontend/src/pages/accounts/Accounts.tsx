@@ -4,7 +4,7 @@ import { LuArrowLeftRight  } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { LuPiggyBank, LuCircleUserRound, LuCircleDollarSign, LuEllipsisVertical  } from "react-icons/lu";
 import { GetUserAccounts } from "@/controllers/getUserAccounts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAuth } from "@/contexts/authContext";
 
 export interface Account {
@@ -27,10 +27,6 @@ const getUserAccounts = new GetUserAccounts();
 export function Accounts() {
     const navigate = useNavigate();
     const [accounts, setAccounts] = useState<Account[]>([]);
-    const [totalAccounts, setTotalAccounts ] = useState<number>(0);
-    const [ totalAmount, setTotalAmount ] = useState<number>(0);
-    const [ totalActiveAccounts, setTotalActiveAccounts ] = useState<number>(0);
-    const [ greatestAmount, setGreatestAmount ] = useState<greatestAmount>({number: 0, name: ""});
     const { token } = useAuth();
 
 
@@ -44,45 +40,45 @@ export function Accounts() {
             setAccounts(response.data);
         };
 
-        const loadAccountNumbers = () => {
-
-            let totalAmountLocal = 0;
-            let greatestAmountLocal = {
-                number: 0,
-                name: ""
-            };
-            let totalActiveAccountsLocal = 0;
-            let totalAccountsLocal = 0;
-
-            accounts.map((account) => {
-                totalAccountsLocal += 1;
-                totalAmountLocal += account.amount;
-                
-                if(account.amount > greatestAmountLocal.number) {
-                    greatestAmountLocal.number = account.amount;
-                    greatestAmountLocal.name = account.name;
-                }
-                if(account.active) {
-                    totalActiveAccountsLocal += 1;
-                }
-                
-            })
-
-            setTotalAmount(totalAmountLocal);
-            setGreatestAmount(greatestAmountLocal);
-            setTotalActiveAccounts(totalActiveAccountsLocal);
-            setTotalAccounts(totalAccountsLocal);
-
-        }
-
         loadAccounts();
-        loadAccountNumbers();
+    }, [token]);
 
-    }, [token, accounts]);
+    const accountNumbers = useMemo(() => {
+
+        let totalAmount = 0;
+        let greatestAmount = {
+            number: 0,
+            name: ""
+        };
+        let totalActiveAccounts = 0;
+
+        accounts.forEach((account) => {
+            totalAmount += account.amount;
+
+            if (account.amount > greatestAmount.number) {
+                greatestAmount = {
+                    number: account.amount,
+                    name: account.name
+                };
+            }
+
+            if (account.active) {
+                totalActiveAccounts++;
+            }
+        });
+
+        return {
+            totalAmount,
+            greatestAmount,
+            totalActiveAccounts,
+            totalAccounts: accounts.length
+        };
+
+    }, [accounts]);
 
     return (
 
-        <div className="w-screen h-screen bg-[#E2E8F0]/40 flex">
+        <div className="w-screen h-screen bg-[#E2E8F0]/30 flex">
             
             <Sidebar/>
             
@@ -123,7 +119,7 @@ export function Accounts() {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <p className="text-sm font-semibold text-[#7b8491]">Saldo total</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{(totalAmount / 100).toLocaleString("pt-BR", {
+                                <h3 className="text-gray-800 font-bold text-2xl">{(accountNumbers.totalAmount / 100).toLocaleString("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
                                     })}
@@ -140,8 +136,8 @@ export function Accounts() {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <p className="text-sm font-semibold text-[#7b8491]">Contas ativas</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{totalActiveAccounts}</h3>
-                                <p className="text-sm font-semibold text-[#8f949c]">de {totalAccounts}</p>
+                                <h3 className="text-gray-800 font-bold text-2xl">{accountNumbers.totalActiveAccounts}</h3>
+                                <p className="text-sm font-semibold text-[#8f949c]">de {accountNumbers.totalAccounts}</p>
                             </div>
                         </div>
 
@@ -153,12 +149,12 @@ export function Accounts() {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <p className="text-sm font-semibold text-[#7b8491]">Maior saldo</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{(greatestAmount.number / 100).toLocaleString("pt-BR", {
+                                <h3 className="text-gray-800 font-bold text-2xl">{(accountNumbers.greatestAmount.number / 100).toLocaleString("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
                                     })}
                                 </h3>
-                                <p className="text-sm font-semibold text-[#8f949c]">{greatestAmount.name}</p>
+                                <p className="text-sm font-semibold text-[#8f949c]">{accountNumbers.greatestAmount.name}</p>
                             </div>
                         </div>
                     </div>

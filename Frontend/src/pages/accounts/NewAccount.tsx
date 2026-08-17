@@ -62,7 +62,7 @@ export function NewAccount() {
     }
 
     return (
-        <div className="w-screen h-screen bg-[#E2E8F0]/40 flex">
+        <div className="w-screen h-screen bg-[#E2E8F0]/30 flex">
                     
                     
                 <Sidebar/>
@@ -99,7 +99,7 @@ export function NewAccount() {
 
                     <div className="w-full h-full p-6 flex flex-col">
                         
-                        <div className="bg-white shadow-md p-6 rounded-lg flex flex-col gap-6">
+                        <div className="bg-white border-[#94A3B8]/20 shadow-md p-6 rounded-lg flex flex-col gap-6">
                             <h2 className="font-semibold">Informações da transação</h2>
 
                             <div className="flex w-full h-full gap-10">

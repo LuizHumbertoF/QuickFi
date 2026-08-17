@@ -108,7 +108,7 @@ export function NewTransaction() {
 
     return (
 
-        <div className="w-screen h-screen bg-[#E2E8F0]/40 flex">
+        <div className="w-screen h-screen bg-[#E2E8F0]/30 flex">
             
             
             <Sidebar/>
