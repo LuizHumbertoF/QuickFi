@@ -13,8 +13,9 @@ import {
     LuArrowUp,
     LuEllipsisVertical
 } from "react-icons/lu";
+import { CategorySummary } from "./CategorySummary";
 
-interface Transaction {
+export interface Transaction {
     id: number;
     accountId: number;
     category: string;
@@ -210,51 +211,42 @@ export function Transactions() {
                     </div>
 
                 </div>
+                <div className="flex w-full h-full ">
+                    <div className="flex flex-col w-5/7 h-80 bg-white border rounded-lg shadow-lg border-[#94A3B8]/20 overflow-hidden">
 
-                <div className="flex flex-col w-full h-80 bg-white border rounded-lg shadow-md border-[#94A3B8]/20 overflow-hidden">
-
-                    {/* Cabeçalho */}
-                    <div className="flex w-full items-center px-4 py-4 border-b border-[#94A3B8]/20 shrink-0">
-
-                        <p className="w-[12%] text-xs font-semibold text-[#7b8491]">
-                            Data
-                        </p>
-
-                        <p className="w-[25%] text-xs font-semibold text-[#7b8491]">
-                            Descrição
-                        </p>
-
-                        <p className="w-[15%] text-xs font-semibold text-[#7b8491]">
-                            Categoria
-                        </p>
-
-                        <p className="w-[16%] text-xs font-semibold text-[#7b8491]">
-                            Conta
-                        </p>
-
-                        <p className="w-[14%] text-xs font-semibold text-[#7b8491]">
-                            Valor
-                        </p>
-
-                        <p className="w-[12%] text-xs font-semibold text-[#7b8491]">
-                            Tipo
-                        </p>
-
-                        <div className="w-[6%]" />
-
-                    </div>
+                        {/* Cabeçalho */}
+                        <div className="grid grid-cols-[80px_2fr_1.5fr_1.5fr_120px_100px_40px] gap-4 w-full items-center px-4 py-4 border-b border-[#94A3B8]/20 shrink-0">
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Data
+                            </p>
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Descrição
+                            </p>
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Categoria
+                            </p>
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Conta
+                            </p>
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Valor
+                            </p>
+                            <p className="text-xs font-semibold text-[#7b8491]">
+                                Tipo
+                            </p>
+                            {/* Div vazia para alinhar com o botão de Opções */}
+                            <div></div>
+                        </div>
 
 
-                    {/* Transações */}
-                    <div className="flex flex-col w-full overflow-y-auto">
+                        {/* Transações */}
+                        <div className="flex flex-col w-full overflow-y-auto">
 
-                        {flatTransactions.map((transaction, index) => {
+                            {flatTransactions.map((transaction, index) => {
 
-                            const isIncome =
-                                transaction.type.toLowerCase() === "receita";
+                                const isIncome = transaction.type.toLowerCase() === "receita";
 
-                            const formattedDate =
-                                new Date(transaction.transactionDate + "T00:00:00")
+                                const formattedDate = new Date(transaction.transactionDate + "T00:00:00")
                                     .toLocaleDateString("pt-BR", {
                                         day: "2-digit",
                                         month: "short",
@@ -262,170 +254,118 @@ export function Transactions() {
                                     })
                                     .replace(".", "");
 
-                            return (
+                                return (
 
-                                <div
-                                    key={transaction.id}
-                                    className={`
-                                        flex w-full items-center px-4 py-3
-                                        transition-colors duration-150
-                                        hover:bg-[#F8FAFC]
-                                        ${index !== flatTransactions.length - 1
-                                            ? "border-b border-[#E2E8F0]"
-                                            : ""
-                                        }
-                                    `}
-                                >
+                                    <div
+                                        key={transaction.id}
+                                        className={`
+                                            grid grid-cols-[80px_2fr_1.5fr_1.5fr_120px_100px_40px] gap-4 w-full items-center px-4 py-3
+                                            transition-colors duration-150 hover:bg-[#F8FAFC]
+                                            ${index !== flatTransactions.length - 1 ? "border-b border-[#E2E8F0]" : ""}
+                                        `}
+                                    >
 
-                                    {/* Data */}
-                                    <div className="w-[12%] flex items-center gap-2">
+                                        {/* Data */}
+                                        <div className="flex flex-col gap-2">
+                                            <div
+                                                className={`
+                                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0
+                                                    ${isIncome ? "bg-[#10B981]/10" : "bg-red-500/10"}
+                                                `}
+                                            >
+                                                {isIncome ? (
+                                                    <LuArrowUp className="w-4 h-4 text-[#10B981]" />
+                                                ) : (
+                                                    <LuArrowDown className="w-4 h-4 text-red-500" />
+                                                )}
+                                            </div>
 
-                                        <div
-                                            className={`
-                                                w-7 h-7 rounded-full flex items-center justify-center shrink-0
-                                                ${isIncome
-                                                    ? "bg-[#10B981]/10"
-                                                    : "bg-red-500/10"
-                                                }
-                                            `}
-                                        >
-
-                                            {isIncome ? (
-                                                <LuArrowUp
-                                                    className="w-4 h-4 text-[#10B981]"
-                                                />
-                                            ) : (
-                                                <LuArrowDown
-                                                    className="w-4 h-4 text-red-500"
-                                                />
-                                            )}
-
+                                            <p className="text-xs text-[#64748B]">
+                                                {formattedDate}
+                                            </p>
                                         </div>
 
-                                        <p className="text-xs text-[#64748B]">
-                                            {formattedDate}
-                                        </p>
 
-                                    </div>
-
-
-                                    {/* Descrição */}
-                                    <div className="w-[25%] pr-4">
-
-                                        <p className="text-sm font-semibold text-[#1E293B] truncate">
-                                            {transaction.description}
-                                        </p>
-
-                                    </div>
-
-
-                                    {/* Categoria */}
-                                    <div className="w-[15%] flex items-center gap-2">
-
-                                        <div className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
-
-                                        <p className="text-sm text-[#64748B] truncate">
-                                            {transaction.category}
-                                        </p>
-
-                                    </div>
-
-
-                                    {/* Conta */}
-                                    <div className="w-[16%] flex items-center gap-2">
-
-                                        <div
-                                            className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 text-white text-xs font-bold"
-                                            style={{
-                                                backgroundColor:
-                                                    transaction.account.color === "purple"
-                                                        ? "#A855F7"
-                                                        : transaction.account.color === "green"
-                                                            ? "#10B981"
-                                                            : transaction.account.color === "blue"
-                                                                ? "#3B82F6"
-                                                                : transaction.account.color === "pink"
-                                                                    ? "#EC4899"
-                                                                    : "#64748B"
-                                            }}
-                                        >
-                                            {transaction.account.name.charAt(0).toUpperCase()}
+                                        {/* Descrição */}
+                                        <div className="flex">
+                                            <p className="text-sm font-semibold text-[#1E293B] truncate">
+                                                {transaction.description}
+                                            </p>
                                         </div>
 
-                                        <p className="text-sm text-[#64748B] truncate">
-                                            {transaction.account.name}
-                                        </p>
+
+                                        {/* Categoria */}
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
+                                            <p className="text-sm text-[#64748B] truncate">
+                                                {transaction.category}
+                                            </p>
+                                        </div>
+
+
+                                        {/* Conta */}
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-sm text-[#64748B] truncate">
+                                                {transaction.account.name}
+                                            </p>
+                                        </div>
+
+
+                                        {/* Valor */}
+                                        <div>
+                                            <p
+                                                className={`
+                                                    text-sm font-semibold
+                                                    ${isIncome ? "text-[#10B981]" : "text-red-500"}
+                                                `}
+                                            >
+                                                {isIncome ? "+" : "-"} {(transaction.amount / 100).toLocaleString(
+                                                    "pt-BR",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "BRL"
+                                                    }
+                                                )}
+                                            </p>
+                                        </div>
+
+
+                                        {/* Tipo */}
+                                        <div>
+                                            <span
+                                                className={`
+                                                    inline-flex px-2.5 py-1 rounded-md text-xs font-semibold
+                                                    ${isIncome ? "bg-[#10B981]/10 text-[#10B981]" : "bg-red-500/10 text-red-500"}
+                                                `}
+                                            >
+                                                {isIncome ? "Receita" : "Despesa"}
+                                            </span>
+                                        </div>
+
+
+                                        {/* Opções */}
+                                        <div className="flex justify-end">
+                                            <button
+                                                className="
+                                                    p-1.5 rounded-md cursor-pointer text-[#64748B]
+                                                    transition-all duration-150 hover:bg-[#E2E8F0] hover:text-[#1E293B]
+                                                "
+                                            >
+                                                <LuEllipsisVertical className="w-5 h-5" />
+                                            </button>
+                                        </div>
 
                                     </div>
+                                );
+                            })}
 
-
-                                    {/* Valor */}
-                                    <div className="w-[14%]">
-
-                                        <p
-                                            className={`
-                                                text-sm font-semibold
-                                                ${isIncome
-                                                    ? "text-[#10B981]"
-                                                    : "text-red-500"
-                                                }
-                                            `}
-                                        >
-                                            {isIncome ? "+" : "-"}{" "}
-                                            {(transaction.amount / 100).toLocaleString(
-                                                "pt-BR",
-                                                {
-                                                    style: "currency",
-                                                    currency: "BRL"
-                                                }
-                                            )}
-                                        </p>
-
-                                    </div>
-
-
-                                    {/* Tipo */}
-                                    <div className="w-[12%]">
-
-                                        <span
-                                            className={`
-                                                inline-flex px-2.5 py-1 rounded-md
-                                                text-xs font-semibold
-                                                ${isIncome
-                                                    ? "bg-[#10B981]/10 text-[#10B981]"
-                                                    : "bg-red-500/10 text-red-500"
-                                                }
-                                            `}
-                                        >
-                                            {isIncome ? "Receita" : "Despesa"}
-                                        </span>
-
-                                    </div>
-
-
-                                    {/* Opções */}
-                                    <div className="w-[6%] flex justify-end">
-
-                                        <button
-                                            className="
-                                                p-1.5 rounded-md cursor-pointer
-                                                text-[#64748B]
-                                                transition-all duration-150
-                                                hover:bg-[#E2E8F0]
-                                                hover:text-[#1E293B]
-                                            "
-                                        >
-                                            <LuEllipsisVertical className="w-5 h-5" />
-                                        </button>
-
-                                    </div>
-
-                                </div>
-                            );
-                        })}
+                        </div>
 
                     </div>
 
+                    
+                    <CategorySummary transactions={flatTransactions}/>
+                    
                 </div>
             </div>
 

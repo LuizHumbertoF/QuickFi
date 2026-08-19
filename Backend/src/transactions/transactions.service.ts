@@ -35,11 +35,13 @@ export class TransactionsService {
     }
 
     async createTransaction(
-    data: CreateTransactionDto,
-    userId: number
-) {
+        data: CreateTransactionDto,
+        userId: number
+    ) {
+        
+        const numberAmount = Number(data.amount);
 
-    const account = await this.prisma.account.findUnique({
+        const account = await this.prisma.account.findUnique({
             where: {
                 userId_name: {
                     userId,
@@ -49,15 +51,23 @@ export class TransactionsService {
         });
 
         if (!account) {
-            throw new NotFoundException(
-                "Conta não encontrada."
-            );
+            throw new NotFoundException("Conta não encontrada.");
         }
 
-        const numberAmount = Number(data.amount);
+        const [updatedAccount, newTransaction] = await this.prisma.$transaction([
+            
+            this.prisma.account.update({
+                where: {
+                    id: account.id
+                },
+                data: {
+                    amount: data.type === "receita" 
+                        ? { increment: numberAmount } 
+                        : { decrement: numberAmount }
+                }
+            }),
 
-        const newTransaction =
-            await this.prisma.transaction.create({
+            this.prisma.transaction.create({
                 data: {
                     amount: numberAmount,
                     type: data.type,
@@ -66,12 +76,12 @@ export class TransactionsService {
                     recurrentTransaction: data.recurrent,
                     accountId: account.id,
                     transactionDate: data.transactionDate,
-
                     ...(data.paymentType && {
                         paymentType: data.paymentType
                     })
                 }
-            });
+            })
+        ]);
 
         return newTransaction;
     }

@@ -161,10 +161,10 @@ export function Accounts() {
 
                 </div>
 
-                <div className="flex-col w-233.5 h-80 p-6 bg-white border rounded-lg shadow-md border-[#94A3B8]/20">
-                    <div className="flex w-full">
+                <div className="flex-col w-233.5 h-80 bg-white border rounded-lg shadow-md border-[#94A3B8]/20">
+                    <div className="flex w-full border-b border-[#94A3B8]/20 items-center p-4">
                         <p className="text-sm font-semibold text-[#7b8491]">Conta</p>
-                        <p className="ml-auto mr-60 text-sm font-semibold text-[#7b8491]">Saldo</p>
+                        <p className="ml-auto mr-48 text-sm font-semibold text-[#7b8491]">Saldo</p>
                     </div>
 
                     <div className="flex flex-col w-full h-full overflow-y-auto">
@@ -172,9 +172,11 @@ export function Accounts() {
                         {
                             accounts.map((account, index) => (
 
-                                <div className={`flex w-full items-center gap-6 py-3.5 
-                                    ${index !== accounts.length - 1 ? "border-b border-b-[#7b8491]/30" : ""}`}>
-                                    <div className={`bg-${account.color}-500 w-6 h-6 rounded-md`}/>
+                                <div className={`flex w-full items-center gap-6 p-4 
+                                    ${index !== accounts.length - 1 ? "border-b border-b-[#7b8491]/20" : ""}`}>
+                                    <div className={`bg-${account.color}-500 w-7 h-7 rounded-md text-white text-xs font-bold flex items-center justify-center`}>
+                                        {account.name.charAt(0).toUpperCase()}
+                                    </div>
                                     <div className="flex flex-col">
                                         <p className="text-sm font-semibold ">{account.name}</p>
                                         <p className="ml-auto text-sm font-semibold text-[#7b8491]">Conta {account.type}</p>
