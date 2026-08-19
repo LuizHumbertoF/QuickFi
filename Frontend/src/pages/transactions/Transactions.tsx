@@ -4,7 +4,7 @@ import { MdAdd } from "react-icons/md";
 import { LuFilter } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { LuTrendingUp } from "react-icons/lu";
-import { LuTrendingDown, LuPiggyBank } from "react-icons/lu";
+import { LuTrendingDown, LuPiggyBank, LuLightbulb } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/authContext";
 import { GetUserTransactions } from "@/controllers/getUserTransactions";
@@ -14,6 +14,7 @@ import {
     LuEllipsisVertical
 } from "react-icons/lu";
 import { CategorySummary } from "./CategorySummary";
+import { FaLightbulb } from "react-icons/fa";
 
 export interface Transaction {
     id: number;
@@ -206,6 +207,16 @@ export function Transactions() {
                                     :
                                     (<p className="text-sm font-semibold text-red-600">Saldo negativo</p>)
                                 }
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg w-1/4 flex">
+                            <div className="w-full h-full gap-3 bg-[#10B981]/10 flex p-3 shadow-lg border border-[#94A3B8]/10 rounded-lg">
+                                <FaLightbulb className="w-6 h-6 text-[#10B981]"/>
+                                <div className="w-full h-full gap-2">
+                                    <p className="text-[#1E293B] font-semibold">Dica QuickFi</p>
+                                    <p className="text-[#5e6369] text-sm">Melhore isso isso e aquilo</p>
+                                </div>
                             </div>
                         </div>
                     </div>
