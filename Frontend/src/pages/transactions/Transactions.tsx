@@ -65,22 +65,22 @@ export function Transactions() {
 
                         {/* Cabeçalho */}
                         <div className="grid grid-cols-[80px_2fr_1.5fr_1.5fr_120px_100px_40px] gap-4 w-full items-center px-4 py-4 border-b border-[#94A3B8]/20 shrink-0">
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Data
                             </p>
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Descrição
                             </p>
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Categoria
                             </p>
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Conta
                             </p>
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Valor
                             </p>
-                            <p className="text-xs font-semibold text-[#7b8491]">
+                            <p className="text-xs font-semibold text-[#1E293B]">
                                 Tipo
                             </p>
                             {/* Div vazia para alinhar com o botão de Opções */}

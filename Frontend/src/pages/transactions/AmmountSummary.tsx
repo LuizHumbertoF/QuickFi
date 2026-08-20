@@ -30,8 +30,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Receitas</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(incomes / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Receitas</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(incomes / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -46,8 +46,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Despesas</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(expenses / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Despesas</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(expenses / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -62,8 +62,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Total do período</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(totalAmount / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Total do período</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(totalAmount / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -98,8 +98,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                     <p className="text-sm font-semibold text-[#7b8491]">Saldo total</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(accountNumbers.totalAmount / 100).toLocaleString("pt-BR", {
+                                     <p className="text-sm font-semibold text-[#1E293B]">Saldo total</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(accountNumbers.totalAmount / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -115,8 +115,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Receitas</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(incomes / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Receitas</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(incomes / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -131,8 +131,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Despesas</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(expenses / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Despesas</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(expenses / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}
@@ -147,8 +147,8 @@ export function AmmountSummary({ locatedAt }: AmmountSummaryProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-sm font-semibold text-[#7b8491]">Total do período</p>
-                                    <h3 className="text-gray-800 font-bold text-2xl">{(totalAmount / 100).toLocaleString("pt-BR", {
+                                    <p className="text-sm font-semibold text-[#1E293B]">Total do período</p>
+                                    <h3 className="text-[#1E293B] font-bold text-2xl">{(totalAmount / 100).toLocaleString("pt-BR", {
                                             style: "currency",
                                             currency: "BRL",
                                         })}

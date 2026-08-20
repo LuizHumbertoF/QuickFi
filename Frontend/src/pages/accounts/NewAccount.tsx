@@ -107,7 +107,7 @@ export function NewAccount() {
                                 <div className="flex flex-col w-1/2 gap-8 h-full">
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Nome da conta</p>
-                                        <input className="w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md bg-white"
+                                        <input className="w-3/4 h-9 border shadow-sm border-[#E2E8F0] p-6 rounded-md bg-white"
                                             placeholder="Ex: conta principal"
                                             value={accountName}
                                             onChange={(e) => setAccountName(e.target.value)}
@@ -117,7 +117,7 @@ export function NewAccount() {
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Tipo de conta</p>
                                         <button 
-                                            className="bg-white w-2/3 gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                            className="bg-white w-2/3 gap-3 flex items-center text-[#414f63] font-semibold text-sm h-9 border shadow-sm border-[#E2E8F0] p-6 rounded-md"
                                             onClick={() => setOpenedTypeAccount(!openedTypeAccount)}
                                         >   
                                             <LuLandmark className="text-[#10B981] w-4.5 h-4.5"/>
@@ -220,7 +220,7 @@ export function NewAccount() {
                                             <p className="text-sm font-semibold text-[#414f63]">Instituição</p>
                                             <p className="text-sm font-semibold text-[#767f8a]">(Opcional)</p>
                                         </div>
-                                        <input className="bg-white w-3/4 h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        <input className="bg-white w-3/4 h-9 border shadow-sm border-[#E2E8F0] p-6 rounded-md"
                                             placeholder="Ex: Nubank, Inter, Caixa..."
                                             value={InstitutionAccount}
                                             onChange={(e) => setInstitutionAccount(e.target.value)}
@@ -296,7 +296,7 @@ export function NewAccount() {
                                 <div className="flex flex-col w-1/2 gap-8">
                                     <div className="flex flex-col gap-1">
                                         <p className="text-sm font-semibold text-[#414f63]">Saldo inicial</p>
-                                        <input className="bg-white h-9 border shadow-xs border-[#E2E8F0] p-6 rounded-md"
+                                        <input className="bg-white h-9 border shadow-sm border-[#E2E8F0] p-6 rounded-md"
                                             placeholder="R$ 0,00"
                                             value={
                                                 accountAmount
@@ -334,7 +334,7 @@ export function NewAccount() {
                                     </div>
 
                                     <div className=" border border-[#10B981]/20 bg-white rounded-lg">
-                                        <div className="bg-[#10B981]/10 flex justify-center rounded-lg gap-3 p-3">
+                                        <div className="bg-[#10B981]/10 flex justify-center rounded-lg shadow-md gap-3 p-3">
             
                                             <LuBookmark className="w-7 h-7 text-[#10B981]"/>
                                             <div className="flex flex-col p-1">

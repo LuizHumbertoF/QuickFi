@@ -62,8 +62,8 @@ export function Accounts() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
-                                <p className="text-sm font-semibold text-[#7b8491]">Saldo total</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{(accountNumbers.totalAmount / 100).toLocaleString("pt-BR", {
+                                <p className="text-sm font-semibold text-[#1E293B]">Saldo total</p>
+                                <h3 className="text-[#1E293B] font-bold text-2xl">{(accountNumbers.totalAmount / 100).toLocaleString("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
                                     })}
@@ -79,8 +79,8 @@ export function Accounts() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
-                                <p className="text-sm font-semibold text-[#7b8491]">Contas ativas</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{accountNumbers.totalActiveAccounts}</h3>
+                                <p className="text-sm font-semibold text-[#1E293B]">Contas ativas</p>
+                                <h3 className="text-[#1E293B] font-bold text-2xl">{accountNumbers.totalActiveAccounts}</h3>
                                 <p className="text-sm font-semibold text-[#8f949c]">de {accountNumbers.totalAccounts}</p>
                             </div>
                         </div>
@@ -92,8 +92,8 @@ export function Accounts() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
-                                <p className="text-sm font-semibold text-[#7b8491]">Maior saldo</p>
-                                <h3 className="text-gray-800 font-bold text-2xl">{(accountNumbers.greatestAmount.number / 100).toLocaleString("pt-BR", {
+                                <p className="text-sm font-semibold text-[#1E293B]">Maior saldo</p>
+                                <h3 className="text-[#1E293B] font-bold text-2xl">{(accountNumbers.greatestAmount.number / 100).toLocaleString("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
                                     })}
