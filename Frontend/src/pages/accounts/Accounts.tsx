@@ -3,9 +3,7 @@ import { MdAdd } from "react-icons/md";
 import { LuArrowLeftRight  } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { LuPiggyBank, LuCircleUserRound, LuCircleDollarSign, LuEllipsisVertical  } from "react-icons/lu";
-import { GetUserAccounts } from "@/controllers/getUserAccounts";
-import { useEffect, useState, useMemo } from "react";
-import { useAuth } from "@/contexts/authContext";
+import { useAccounts } from "@/contexts/accountsContext";
 
 export interface Account {
     id: number;
@@ -17,64 +15,10 @@ export interface Account {
     active: boolean;
 }
 
-interface greatestAmount {
-    number: number;
-    name: string;
-}
-
-const getUserAccounts = new GetUserAccounts();
 
 export function Accounts() {
     const navigate = useNavigate();
-    const [accounts, setAccounts] = useState<Account[]>([]);
-    const { token } = useAuth();
-
-
-    console.log("token accounts:", token);
-
-    useEffect(() => {
-        if (!token) return;
-
-        const loadAccounts = async () => {
-            const response = await getUserAccounts.execute(token);
-            setAccounts(response.data);
-        };
-
-        loadAccounts();
-    }, [token]);
-
-    const accountNumbers = useMemo(() => {
-
-        let totalAmount = 0;
-        let greatestAmount = {
-            number: 0,
-            name: ""
-        };
-        let totalActiveAccounts = 0;
-
-        accounts.forEach((account) => {
-            totalAmount += account.amount;
-
-            if (account.amount > greatestAmount.number) {
-                greatestAmount = {
-                    number: account.amount,
-                    name: account.name
-                };
-            }
-
-            if (account.active) {
-                totalActiveAccounts++;
-            }
-        });
-
-        return {
-            totalAmount,
-            greatestAmount,
-            totalActiveAccounts,
-            totalAccounts: accounts.length
-        };
-
-    }, [accounts]);
+    const { accounts, accountNumbers} = useAccounts();
 
     return (
 
