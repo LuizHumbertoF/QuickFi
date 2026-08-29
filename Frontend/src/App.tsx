@@ -7,6 +7,7 @@ import { Transactions } from "./pages/transactions/Transactions";
 import { NewTransaction } from "./pages/transactions/NewTransaction";
 import { Accounts } from "./pages/accounts/Accounts";
 import { NewAccount } from "./pages/accounts/NewAccount";
+import { Extract } from "./pages/extract/Extract";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/transactions/newTransaction" element={<NewTransaction />} />
         <Route path="/accounts" element={<Accounts />} />
         <Route path="/accounts/newAccount" element={<NewAccount />} />
+        <Route path="/extract" element={<Extract />} />
       </Routes>
     </BrowserRouter>
   )

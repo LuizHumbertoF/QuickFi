@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/authContext";
 import { LuUser, LuLogOut, LuCircleUserRound, LuArrowLeftRight } from "react-icons/lu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LuFileText } from "react-icons/lu";
 
 
 
@@ -58,9 +59,12 @@ export function Sidebar() {
                         </li>
 
                         <li>
-                            <button className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md">
-                                <MdOutlineCreditCard size={20} className="text-[#10B981]"/>
-                                <p className="text-white">Cartões</p>
+                            <button 
+                                className="cursor-pointer flex justify-start p-4 items-center gap-2 transition-all duration-200 hover:-translate-y-1 hover:bg-[#94A3B8]/15 w-50 h-11 rounded-md"
+                                onClick={() => navigate("/extract")}
+                            >
+                                <LuFileText size={20} className="text-[#10B981]"/>
+                                <p className="text-white">Extrato</p>
                             </button>
                         </li>
 
