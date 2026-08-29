@@ -1,6 +1,6 @@
 import { Sidebar } from "../sidebar/Sidebar"
 import { useNavigate } from "react-router-dom";
-import { LuClock, LuChevronDown, LuFileUp, LuLandmark, LuChevronRight} from "react-icons/lu";
+import { LuClock, LuChevronDown, LuFileUp, LuLandmark, LuChevronRight, LuCircleHelp} from "react-icons/lu";
 
 
 
@@ -21,12 +21,17 @@ export function Extract() {
                         <p className="text-sm text-[#475569]">Importe extratos de suas contas para o QuickFi e mantenha tudo atualizado.</p>
                     </div>
 
-                    <div className="flex items-center justify-center h-12 ml-auto">
+                    <div className="flex items-center justify-center h-12 ml-auto gap-4">
                         
-                        <button className="gap-2 bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 flex items-center justify-center py-2 px-2 rounded-md border shadow-md border-[#E2E8F0] font-semibold">
+                        <button className="gap-2 bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 flex items-center justify-center py-2 px-2 rounded-md border shadow-xs border-[#E2E8F0] text-sm font-semibold">
                             <LuClock className="text-[#475569]" size={20}/>
-                            <p className="text-gray-900">Histórico de Importações</p>
+                            <p className="text-[#475569]">Histórico de Importações</p>
                             <LuChevronDown className="text-[#475569]" size={20}/>
+                        </button>
+
+                        <button className="bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 flex items-center justify-center gap-1 py-2 px-4 rounded-md border shadow-xs border-[#E2E8F0] text-sm font-semibold">
+                            <LuCircleHelp className="text-[#475569]" size={20}/>
+                            <p className="text-[#475569]">Como funciona?</p>
                         </button>
 
                     </div>
