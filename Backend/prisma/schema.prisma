@@ -36,6 +36,7 @@ model Account {
   updatedAt DateTime @updatedAt
 
   transactions Transaction[]
+  import Import[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -58,4 +59,33 @@ model Transaction {
   updatedAt DateTime @updatedAt
 
   account  Account  @relation(fields: [accountId], references: [id], onDelete: Restrict)
+}
+
+model Import {
+  id Int @id @default(autoincrement())
+  accountId Int
+  fileName String
+  status String
+  createdAt DateTime @default(now())
+
+  importTransactions ImportTransaction[]
+
+  account  Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+}
+
+model ImportTransaction {
+  id Int @id @default(autoincrement())
+  importId Int
+  date String
+  description String
+  amount Int
+  type String
+  paymentType String?
+  sugestedCategoryId Int
+  finalCategoryId Int
+  confidente String
+  isDuplicate Boolean
+  selected Boolean
+
+  import  Import  @relation(fields: [importId], references: [id], onDelete: Cascade)
 }

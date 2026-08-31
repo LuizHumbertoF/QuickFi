@@ -53,7 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Account: 'Account',
-  Transaction: 'Transaction'
+  Transaction: 'Transaction',
+  Import: 'Import',
+  ImportTransaction: 'ImportTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -116,6 +118,35 @@ export const TransactionScalarFieldEnum = {
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const ImportScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  fileName: 'fileName',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type ImportScalarFieldEnum = (typeof ImportScalarFieldEnum)[keyof typeof ImportScalarFieldEnum]
+
+
+export const ImportTransactionScalarFieldEnum = {
+  id: 'id',
+  importId: 'importId',
+  date: 'date',
+  description: 'description',
+  amount: 'amount',
+  type: 'type',
+  paymentType: 'paymentType',
+  sugestedCategoryId: 'sugestedCategoryId',
+  finalCategoryId: 'finalCategoryId',
+  confidente: 'confidente',
+  isDuplicate: 'isDuplicate',
+  selected: 'selected'
+} as const
+
+export type ImportTransactionScalarFieldEnum = (typeof ImportTransactionScalarFieldEnum)[keyof typeof ImportTransactionScalarFieldEnum]
 
 
 export const SortOrder = {

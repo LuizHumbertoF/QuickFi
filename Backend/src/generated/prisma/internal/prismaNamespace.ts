@@ -399,7 +399,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Account: 'Account',
-  Transaction: 'Transaction'
+  Transaction: 'Transaction',
+  Import: 'Import',
+  ImportTransaction: 'ImportTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "transaction"
+    modelProps: "user" | "account" | "transaction" | "import" | "importTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +643,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Import: {
+      payload: Prisma.$ImportPayload<ExtArgs>
+      fields: Prisma.ImportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ImportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ImportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        findFirst: {
+          args: Prisma.ImportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ImportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        findMany: {
+          args: Prisma.ImportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>[]
+        }
+        create: {
+          args: Prisma.ImportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        createMany: {
+          args: Prisma.ImportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ImportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>[]
+        }
+        delete: {
+          args: Prisma.ImportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        update: {
+          args: Prisma.ImportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        deleteMany: {
+          args: Prisma.ImportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ImportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ImportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>[]
+        }
+        upsert: {
+          args: Prisma.ImportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportPayload>
+        }
+        aggregate: {
+          args: Prisma.ImportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateImport>
+        }
+        groupBy: {
+          args: Prisma.ImportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ImportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportCountAggregateOutputType> | number
+        }
+      }
+    }
+    ImportTransaction: {
+      payload: Prisma.$ImportTransactionPayload<ExtArgs>
+      fields: Prisma.ImportTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ImportTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ImportTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.ImportTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ImportTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.ImportTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.ImportTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.ImportTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ImportTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.ImportTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        update: {
+          args: Prisma.ImportTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ImportTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ImportTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ImportTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ImportTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.ImportTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateImportTransaction>
+        }
+        groupBy: {
+          args: Prisma.ImportTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ImportTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -724,6 +874,35 @@ export const TransactionScalarFieldEnum = {
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const ImportScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  fileName: 'fileName',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type ImportScalarFieldEnum = (typeof ImportScalarFieldEnum)[keyof typeof ImportScalarFieldEnum]
+
+
+export const ImportTransactionScalarFieldEnum = {
+  id: 'id',
+  importId: 'importId',
+  date: 'date',
+  description: 'description',
+  amount: 'amount',
+  type: 'type',
+  paymentType: 'paymentType',
+  sugestedCategoryId: 'sugestedCategoryId',
+  finalCategoryId: 'finalCategoryId',
+  confidente: 'confidente',
+  isDuplicate: 'isDuplicate',
+  selected: 'selected'
+} as const
+
+export type ImportTransactionScalarFieldEnum = (typeof ImportTransactionScalarFieldEnum)[keyof typeof ImportTransactionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -972,6 +1151,8 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   account?: Prisma.AccountOmit
   transaction?: Prisma.TransactionOmit
+  import?: Prisma.ImportOmit
+  importTransaction?: Prisma.ImportTransactionOmit
 }
 
 /* Types for Logging */
