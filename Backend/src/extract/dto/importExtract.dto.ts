@@ -6,5 +6,5 @@ import {
 
 
 export class ImportExtractDto {
-    file!: File;
+    account!: string;
 }

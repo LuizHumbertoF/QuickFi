@@ -30,16 +30,14 @@ export type ImportTransactionAvgAggregateOutputType = {
   id: number | null
   importId: number | null
   amount: number | null
-  sugestedCategoryId: number | null
-  finalCategoryId: number | null
+  balance: number | null
 }
 
 export type ImportTransactionSumAggregateOutputType = {
   id: number | null
   importId: number | null
   amount: number | null
-  sugestedCategoryId: number | null
-  finalCategoryId: number | null
+  balance: number | null
 }
 
 export type ImportTransactionMinAggregateOutputType = {
@@ -48,13 +46,12 @@ export type ImportTransactionMinAggregateOutputType = {
   date: string | null
   description: string | null
   amount: number | null
+  balance: number | null
   type: string | null
   paymentType: string | null
-  sugestedCategoryId: number | null
-  finalCategoryId: number | null
-  confidente: string | null
-  isDuplicate: boolean | null
-  selected: boolean | null
+  sugestedCategory: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ImportTransactionMaxAggregateOutputType = {
@@ -63,13 +60,12 @@ export type ImportTransactionMaxAggregateOutputType = {
   date: string | null
   description: string | null
   amount: number | null
+  balance: number | null
   type: string | null
   paymentType: string | null
-  sugestedCategoryId: number | null
-  finalCategoryId: number | null
-  confidente: string | null
-  isDuplicate: boolean | null
-  selected: boolean | null
+  sugestedCategory: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ImportTransactionCountAggregateOutputType = {
@@ -78,13 +74,12 @@ export type ImportTransactionCountAggregateOutputType = {
   date: number
   description: number
   amount: number
+  balance: number
   type: number
   paymentType: number
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: number
-  isDuplicate: number
-  selected: number
+  sugestedCategory: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -93,16 +88,14 @@ export type ImportTransactionAvgAggregateInputType = {
   id?: true
   importId?: true
   amount?: true
-  sugestedCategoryId?: true
-  finalCategoryId?: true
+  balance?: true
 }
 
 export type ImportTransactionSumAggregateInputType = {
   id?: true
   importId?: true
   amount?: true
-  sugestedCategoryId?: true
-  finalCategoryId?: true
+  balance?: true
 }
 
 export type ImportTransactionMinAggregateInputType = {
@@ -111,13 +104,12 @@ export type ImportTransactionMinAggregateInputType = {
   date?: true
   description?: true
   amount?: true
+  balance?: true
   type?: true
   paymentType?: true
-  sugestedCategoryId?: true
-  finalCategoryId?: true
-  confidente?: true
-  isDuplicate?: true
-  selected?: true
+  sugestedCategory?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ImportTransactionMaxAggregateInputType = {
@@ -126,13 +118,12 @@ export type ImportTransactionMaxAggregateInputType = {
   date?: true
   description?: true
   amount?: true
+  balance?: true
   type?: true
   paymentType?: true
-  sugestedCategoryId?: true
-  finalCategoryId?: true
-  confidente?: true
-  isDuplicate?: true
-  selected?: true
+  sugestedCategory?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ImportTransactionCountAggregateInputType = {
@@ -141,13 +132,12 @@ export type ImportTransactionCountAggregateInputType = {
   date?: true
   description?: true
   amount?: true
+  balance?: true
   type?: true
   paymentType?: true
-  sugestedCategoryId?: true
-  finalCategoryId?: true
-  confidente?: true
-  isDuplicate?: true
-  selected?: true
+  sugestedCategory?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -243,13 +233,12 @@ export type ImportTransactionGroupByOutputType = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt: Date
+  updatedAt: Date
   _count: ImportTransactionCountAggregateOutputType | null
   _avg: ImportTransactionAvgAggregateOutputType | null
   _sum: ImportTransactionSumAggregateOutputType | null
@@ -281,13 +270,12 @@ export type ImportTransactionWhereInput = {
   date?: Prisma.StringFilter<"ImportTransaction"> | string
   description?: Prisma.StringFilter<"ImportTransaction"> | string
   amount?: Prisma.IntFilter<"ImportTransaction"> | number
+  balance?: Prisma.IntFilter<"ImportTransaction"> | number
   type?: Prisma.StringFilter<"ImportTransaction"> | string
   paymentType?: Prisma.StringNullableFilter<"ImportTransaction"> | string | null
-  sugestedCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  finalCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  confidente?: Prisma.StringFilter<"ImportTransaction"> | string
-  isDuplicate?: Prisma.BoolFilter<"ImportTransaction"> | boolean
-  selected?: Prisma.BoolFilter<"ImportTransaction"> | boolean
+  sugestedCategory?: Prisma.StringFilter<"ImportTransaction"> | string
+  createdAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
   import?: Prisma.XOR<Prisma.ImportScalarRelationFilter, Prisma.ImportWhereInput>
 }
 
@@ -297,13 +285,12 @@ export type ImportTransactionOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
   type?: Prisma.SortOrder
   paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
-  confidente?: Prisma.SortOrder
-  isDuplicate?: Prisma.SortOrder
-  selected?: Prisma.SortOrder
+  sugestedCategory?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   import?: Prisma.ImportOrderByWithRelationInput
 }
 
@@ -316,13 +303,12 @@ export type ImportTransactionWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.StringFilter<"ImportTransaction"> | string
   description?: Prisma.StringFilter<"ImportTransaction"> | string
   amount?: Prisma.IntFilter<"ImportTransaction"> | number
+  balance?: Prisma.IntFilter<"ImportTransaction"> | number
   type?: Prisma.StringFilter<"ImportTransaction"> | string
   paymentType?: Prisma.StringNullableFilter<"ImportTransaction"> | string | null
-  sugestedCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  finalCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  confidente?: Prisma.StringFilter<"ImportTransaction"> | string
-  isDuplicate?: Prisma.BoolFilter<"ImportTransaction"> | boolean
-  selected?: Prisma.BoolFilter<"ImportTransaction"> | boolean
+  sugestedCategory?: Prisma.StringFilter<"ImportTransaction"> | string
+  createdAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
   import?: Prisma.XOR<Prisma.ImportScalarRelationFilter, Prisma.ImportWhereInput>
 }, "id">
 
@@ -332,13 +318,12 @@ export type ImportTransactionOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
   type?: Prisma.SortOrder
   paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
-  confidente?: Prisma.SortOrder
-  isDuplicate?: Prisma.SortOrder
-  selected?: Prisma.SortOrder
+  sugestedCategory?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ImportTransactionCountOrderByAggregateInput
   _avg?: Prisma.ImportTransactionAvgOrderByAggregateInput
   _max?: Prisma.ImportTransactionMaxOrderByAggregateInput
@@ -355,26 +340,24 @@ export type ImportTransactionScalarWhereWithAggregatesInput = {
   date?: Prisma.StringWithAggregatesFilter<"ImportTransaction"> | string
   description?: Prisma.StringWithAggregatesFilter<"ImportTransaction"> | string
   amount?: Prisma.IntWithAggregatesFilter<"ImportTransaction"> | number
+  balance?: Prisma.IntWithAggregatesFilter<"ImportTransaction"> | number
   type?: Prisma.StringWithAggregatesFilter<"ImportTransaction"> | string
   paymentType?: Prisma.StringNullableWithAggregatesFilter<"ImportTransaction"> | string | null
-  sugestedCategoryId?: Prisma.IntWithAggregatesFilter<"ImportTransaction"> | number
-  finalCategoryId?: Prisma.IntWithAggregatesFilter<"ImportTransaction"> | number
-  confidente?: Prisma.StringWithAggregatesFilter<"ImportTransaction"> | string
-  isDuplicate?: Prisma.BoolWithAggregatesFilter<"ImportTransaction"> | boolean
-  selected?: Prisma.BoolWithAggregatesFilter<"ImportTransaction"> | boolean
+  sugestedCategory?: Prisma.StringWithAggregatesFilter<"ImportTransaction"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ImportTransaction"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ImportTransaction"> | Date | string
 }
 
 export type ImportTransactionCreateInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   import: Prisma.ImportCreateNestedOneWithoutImportTransactionsInput
 }
 
@@ -384,26 +367,24 @@ export type ImportTransactionUncheckedCreateInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportTransactionUpdateInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   import?: Prisma.ImportUpdateOneRequiredWithoutImportTransactionsNestedInput
 }
 
@@ -413,13 +394,12 @@ export type ImportTransactionUncheckedUpdateInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportTransactionCreateManyInput = {
@@ -428,26 +408,24 @@ export type ImportTransactionCreateManyInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportTransactionUpdateManyMutationInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportTransactionUncheckedUpdateManyInput = {
@@ -456,13 +434,12 @@ export type ImportTransactionUncheckedUpdateManyInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportTransactionListRelationFilter = {
@@ -481,21 +458,19 @@ export type ImportTransactionCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
   type?: Prisma.SortOrder
   paymentType?: Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
-  confidente?: Prisma.SortOrder
-  isDuplicate?: Prisma.SortOrder
-  selected?: Prisma.SortOrder
+  sugestedCategory?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportTransactionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   importId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
 }
 
 export type ImportTransactionMaxOrderByAggregateInput = {
@@ -504,13 +479,12 @@ export type ImportTransactionMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
   type?: Prisma.SortOrder
   paymentType?: Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
-  confidente?: Prisma.SortOrder
-  isDuplicate?: Prisma.SortOrder
-  selected?: Prisma.SortOrder
+  sugestedCategory?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportTransactionMinOrderByAggregateInput = {
@@ -519,21 +493,19 @@ export type ImportTransactionMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
   type?: Prisma.SortOrder
   paymentType?: Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
-  confidente?: Prisma.SortOrder
-  isDuplicate?: Prisma.SortOrder
-  selected?: Prisma.SortOrder
+  sugestedCategory?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportTransactionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   importId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  sugestedCategoryId?: Prisma.SortOrder
-  finalCategoryId?: Prisma.SortOrder
+  balance?: Prisma.SortOrder
 }
 
 export type ImportTransactionCreateNestedManyWithoutImportInput = {
@@ -582,13 +554,12 @@ export type ImportTransactionCreateWithoutImportInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportTransactionUncheckedCreateWithoutImportInput = {
@@ -596,13 +567,12 @@ export type ImportTransactionUncheckedCreateWithoutImportInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportTransactionCreateOrConnectWithoutImportInput = {
@@ -640,13 +610,12 @@ export type ImportTransactionScalarWhereInput = {
   date?: Prisma.StringFilter<"ImportTransaction"> | string
   description?: Prisma.StringFilter<"ImportTransaction"> | string
   amount?: Prisma.IntFilter<"ImportTransaction"> | number
+  balance?: Prisma.IntFilter<"ImportTransaction"> | number
   type?: Prisma.StringFilter<"ImportTransaction"> | string
   paymentType?: Prisma.StringNullableFilter<"ImportTransaction"> | string | null
-  sugestedCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  finalCategoryId?: Prisma.IntFilter<"ImportTransaction"> | number
-  confidente?: Prisma.StringFilter<"ImportTransaction"> | string
-  isDuplicate?: Prisma.BoolFilter<"ImportTransaction"> | boolean
-  selected?: Prisma.BoolFilter<"ImportTransaction"> | boolean
+  sugestedCategory?: Prisma.StringFilter<"ImportTransaction"> | string
+  createdAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ImportTransaction"> | Date | string
 }
 
 export type ImportTransactionCreateManyImportInput = {
@@ -654,26 +623,24 @@ export type ImportTransactionCreateManyImportInput = {
   date: string
   description: string
   amount: number
+  balance: number
   type: string
   paymentType?: string | null
-  sugestedCategoryId: number
-  finalCategoryId: number
-  confidente: string
-  isDuplicate: boolean
-  selected: boolean
+  sugestedCategory: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportTransactionUpdateWithoutImportInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportTransactionUncheckedUpdateWithoutImportInput = {
@@ -681,13 +648,12 @@ export type ImportTransactionUncheckedUpdateWithoutImportInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportTransactionUncheckedUpdateManyWithoutImportInput = {
@@ -695,13 +661,12 @@ export type ImportTransactionUncheckedUpdateManyWithoutImportInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   paymentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sugestedCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  finalCategoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  confidente?: Prisma.StringFieldUpdateOperationsInput | string
-  isDuplicate?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sugestedCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -712,13 +677,12 @@ export type ImportTransactionSelect<ExtArgs extends runtime.Types.Extensions.Int
   date?: boolean
   description?: boolean
   amount?: boolean
+  balance?: boolean
   type?: boolean
   paymentType?: boolean
-  sugestedCategoryId?: boolean
-  finalCategoryId?: boolean
-  confidente?: boolean
-  isDuplicate?: boolean
-  selected?: boolean
+  sugestedCategory?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   import?: boolean | Prisma.ImportDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["importTransaction"]>
 
@@ -728,13 +692,12 @@ export type ImportTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   date?: boolean
   description?: boolean
   amount?: boolean
+  balance?: boolean
   type?: boolean
   paymentType?: boolean
-  sugestedCategoryId?: boolean
-  finalCategoryId?: boolean
-  confidente?: boolean
-  isDuplicate?: boolean
-  selected?: boolean
+  sugestedCategory?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   import?: boolean | Prisma.ImportDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["importTransaction"]>
 
@@ -744,13 +707,12 @@ export type ImportTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   date?: boolean
   description?: boolean
   amount?: boolean
+  balance?: boolean
   type?: boolean
   paymentType?: boolean
-  sugestedCategoryId?: boolean
-  finalCategoryId?: boolean
-  confidente?: boolean
-  isDuplicate?: boolean
-  selected?: boolean
+  sugestedCategory?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   import?: boolean | Prisma.ImportDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["importTransaction"]>
 
@@ -760,16 +722,15 @@ export type ImportTransactionSelectScalar = {
   date?: boolean
   description?: boolean
   amount?: boolean
+  balance?: boolean
   type?: boolean
   paymentType?: boolean
-  sugestedCategoryId?: boolean
-  finalCategoryId?: boolean
-  confidente?: boolean
-  isDuplicate?: boolean
-  selected?: boolean
+  sugestedCategory?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ImportTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "importId" | "date" | "description" | "amount" | "type" | "paymentType" | "sugestedCategoryId" | "finalCategoryId" | "confidente" | "isDuplicate" | "selected", ExtArgs["result"]["importTransaction"]>
+export type ImportTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "importId" | "date" | "description" | "amount" | "balance" | "type" | "paymentType" | "sugestedCategory" | "createdAt" | "updatedAt", ExtArgs["result"]["importTransaction"]>
 export type ImportTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   import?: boolean | Prisma.ImportDefaultArgs<ExtArgs>
 }
@@ -791,13 +752,12 @@ export type $ImportTransactionPayload<ExtArgs extends runtime.Types.Extensions.I
     date: string
     description: string
     amount: number
+    balance: number
     type: string
     paymentType: string | null
-    sugestedCategoryId: number
-    finalCategoryId: number
-    confidente: string
-    isDuplicate: boolean
-    selected: boolean
+    sugestedCategory: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["importTransaction"]>
   composites: {}
 }
@@ -1227,13 +1187,12 @@ export interface ImportTransactionFieldRefs {
   readonly date: Prisma.FieldRef<"ImportTransaction", 'String'>
   readonly description: Prisma.FieldRef<"ImportTransaction", 'String'>
   readonly amount: Prisma.FieldRef<"ImportTransaction", 'Int'>
+  readonly balance: Prisma.FieldRef<"ImportTransaction", 'Int'>
   readonly type: Prisma.FieldRef<"ImportTransaction", 'String'>
   readonly paymentType: Prisma.FieldRef<"ImportTransaction", 'String'>
-  readonly sugestedCategoryId: Prisma.FieldRef<"ImportTransaction", 'Int'>
-  readonly finalCategoryId: Prisma.FieldRef<"ImportTransaction", 'Int'>
-  readonly confidente: Prisma.FieldRef<"ImportTransaction", 'String'>
-  readonly isDuplicate: Prisma.FieldRef<"ImportTransaction", 'Boolean'>
-  readonly selected: Prisma.FieldRef<"ImportTransaction", 'Boolean'>
+  readonly sugestedCategory: Prisma.FieldRef<"ImportTransaction", 'String'>
+  readonly createdAt: Prisma.FieldRef<"ImportTransaction", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"ImportTransaction", 'DateTime'>
 }
     
 

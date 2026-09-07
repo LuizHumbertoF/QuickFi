@@ -66,9 +66,11 @@ model Import {
   accountId Int
   fileName String
   status String
-  createdAt DateTime @default(now())
 
   importTransactions ImportTransaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   account  Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
@@ -79,13 +81,14 @@ model ImportTransaction {
   date String
   description String
   amount Int
+  balance Int
   type String
   paymentType String?
-  sugestedCategoryId Int
-  finalCategoryId Int
-  confidente String
-  isDuplicate Boolean
-  selected Boolean
+  sugestedCategory String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 
   import  Import  @relation(fields: [importId], references: [id], onDelete: Cascade)
 }

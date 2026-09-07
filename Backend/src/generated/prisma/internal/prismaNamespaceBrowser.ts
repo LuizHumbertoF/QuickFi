@@ -125,7 +125,8 @@ export const ImportScalarFieldEnum = {
   accountId: 'accountId',
   fileName: 'fileName',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ImportScalarFieldEnum = (typeof ImportScalarFieldEnum)[keyof typeof ImportScalarFieldEnum]
@@ -137,13 +138,12 @@ export const ImportTransactionScalarFieldEnum = {
   date: 'date',
   description: 'description',
   amount: 'amount',
+  balance: 'balance',
   type: 'type',
   paymentType: 'paymentType',
-  sugestedCategoryId: 'sugestedCategoryId',
-  finalCategoryId: 'finalCategoryId',
-  confidente: 'confidente',
-  isDuplicate: 'isDuplicate',
-  selected: 'selected'
+  sugestedCategory: 'sugestedCategory',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ImportTransactionScalarFieldEnum = (typeof ImportTransactionScalarFieldEnum)[keyof typeof ImportTransactionScalarFieldEnum]

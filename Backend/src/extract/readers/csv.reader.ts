@@ -1,15 +1,14 @@
 import { parse } from "csv-parse/sync";
-import { columnAliases } from "./aliases-object.js";
+import { columnAliases, transactionCategories } from "./aliases-object.js";
 
-interface ImportTransaction {
+export interface ImportTransaction {
   date: string;
   description: string;
   amount: number;
-  totalAmount: number;
+  balance: number;
   type: string;
   paymentType?: string;
-  sugestedCategoryId?: number;
-  finalCategoryId?: number;
+  sugestedCategory: string;
 }
 
 export function csvReader(content: any) {
@@ -36,7 +35,8 @@ export function csvReader(content: any) {
             description: "",
             amount: 0,
             type: "",
-            totalAmount: 0
+            balance: 0,
+            sugestedCategory: ""
         } 
 
         columnAliases.date.forEach(param => {
@@ -46,21 +46,35 @@ export function csvReader(content: any) {
 
                 for(const key of keys) {
                     if(param.test(key)) {
-                        console.log("entrei na parte de data");
-                        localTransaction.date = transaction[key];
-                        return
+                        //console.log("entrei na parte de data");
+                        
+                        const rawDate = transaction[key]; // Exemplo: "10/08/2026"
+
+                        if (rawDate && rawDate.includes('/')) {
+                            // Separa o dia, mês e ano usando a barra
+                            const [dia, mes, ano] = rawDate.split('/');
+                            
+                            // Remonta no padrão ISO: "2026-08-10"
+                            localTransaction.date = `${ano}-${mes}-${dia}`;
+                        } else {
+                            // Fallback caso a data já venha formatada de outro jeito
+                            localTransaction.date = rawDate; 
+                        }
+    
                     }
                 }
             }    
         });
 
-        columnAliases.amount.forEach(param => {
+        columnAliases.balance.forEach(param => {
 
             if (param instanceof RegExp) {
                 for(const key of keys) {
                     if(param.test(key)) {
-                        console.log("entrei na parte de total amount");
-                        localTransaction.totalAmount = transaction[key];
+                        //console.log("entrei na parte de total amount");
+                        const formattedNumber = transaction[key].replace(/\./g, "").replace(/,/g, ".");
+                        const balance = Number(formattedNumber);
+                        localTransaction.balance = balance;
                         return
                     }
                 }
@@ -72,16 +86,39 @@ export function csvReader(content: any) {
             if (param instanceof RegExp) {
                 for(const key of keys) {
                     if(param.test(key)) {
-                        console.log("entrei na parte de descricao");
-                        localTransaction.description = transaction[key];
-                        return
+                        //console.log("entrei na parte de descricao");
+                        localTransaction.description = transaction[key].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");;
+                        break;
                     }
                 }
-            }    
+            }
+            
+            if(localTransaction.description) {
+                const transactionCategoriesKeys = Object.keys(transactionCategories);
+
+                transactionCategoriesKeys.forEach((key: string) => {
+                    const keyName = key as keyof typeof transactionCategories;
+                    
+                    transactionCategories[keyName].forEach(regex => {
+                        
+                        if(regex.test(localTransaction.description)) {
+
+                            localTransaction.sugestedCategory = keyName;
+
+                            return;
+                        }
+                    });
+                });
+            }
+
+            if(!localTransaction.sugestedCategory) {
+                localTransaction.sugestedCategory = "outro";
+            }
+
         });
 
         keys.forEach((key) => {
-            if(/(?:^|[\s_])credito(?:[\s_]|$)/.test(key) && transaction[key] !== "") {
+            if((/(?:^|[\s_])credito(?:[\s_]|$)/.test(key) || /(?:^|[\s_])entrada(?:[\s_]|$)/.test(key)) && transaction[key] !== "") {
                 //console.log("entrei na parte de credito");
                 localTransaction.type = "credito";
                 
@@ -90,7 +127,7 @@ export function csvReader(content: any) {
                 localTransaction.amount = credito;
                 return;
             }
-            else if(/(?:^|[\s_])debito(?:[\s_]|$)/.test(key) && transaction[key] !== "") {
+            else if((/(?:^|[\s_])debito(?:[\s_]|$)/.test(key) || /(?:^|[\s_])saida(?:[\s_]|$)/.test(key)) && transaction[key] !== "") {
                 //console.log("entrei na parte de debito");
                 localTransaction.type = "debito";
                 
@@ -102,8 +139,10 @@ export function csvReader(content: any) {
         });
 
         transactions.push(localTransaction);
-    })
+    });
 
     console.log("parsed csv: ", records);
     console.log("import transactions: ", transactions);
+
+    return transactions;
 }

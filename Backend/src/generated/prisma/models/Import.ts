@@ -42,6 +42,7 @@ export type ImportMinAggregateOutputType = {
   fileName: string | null
   status: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ImportMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type ImportMaxAggregateOutputType = {
   fileName: string | null
   status: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ImportCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type ImportCountAggregateOutputType = {
   fileName: number
   status: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -78,6 +81,7 @@ export type ImportMinAggregateInputType = {
   fileName?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ImportMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type ImportMaxAggregateInputType = {
   fileName?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ImportCountAggregateInputType = {
@@ -94,6 +99,7 @@ export type ImportCountAggregateInputType = {
   fileName?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -189,6 +195,7 @@ export type ImportGroupByOutputType = {
   fileName: string
   status: string
   createdAt: Date
+  updatedAt: Date
   _count: ImportCountAggregateOutputType | null
   _avg: ImportAvgAggregateOutputType | null
   _sum: ImportSumAggregateOutputType | null
@@ -220,6 +227,7 @@ export type ImportWhereInput = {
   fileName?: Prisma.StringFilter<"Import"> | string
   status?: Prisma.StringFilter<"Import"> | string
   createdAt?: Prisma.DateTimeFilter<"Import"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Import"> | Date | string
   importTransactions?: Prisma.ImportTransactionListRelationFilter
   account?: Prisma.XOR<Prisma.AccountScalarRelationFilter, Prisma.AccountWhereInput>
 }
@@ -230,6 +238,7 @@ export type ImportOrderByWithRelationInput = {
   fileName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   importTransactions?: Prisma.ImportTransactionOrderByRelationAggregateInput
   account?: Prisma.AccountOrderByWithRelationInput
 }
@@ -243,6 +252,7 @@ export type ImportWhereUniqueInput = Prisma.AtLeast<{
   fileName?: Prisma.StringFilter<"Import"> | string
   status?: Prisma.StringFilter<"Import"> | string
   createdAt?: Prisma.DateTimeFilter<"Import"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Import"> | Date | string
   importTransactions?: Prisma.ImportTransactionListRelationFilter
   account?: Prisma.XOR<Prisma.AccountScalarRelationFilter, Prisma.AccountWhereInput>
 }, "id">
@@ -253,6 +263,7 @@ export type ImportOrderByWithAggregationInput = {
   fileName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ImportCountOrderByAggregateInput
   _avg?: Prisma.ImportAvgOrderByAggregateInput
   _max?: Prisma.ImportMaxOrderByAggregateInput
@@ -269,12 +280,14 @@ export type ImportScalarWhereWithAggregatesInput = {
   fileName?: Prisma.StringWithAggregatesFilter<"Import"> | string
   status?: Prisma.StringWithAggregatesFilter<"Import"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Import"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Import"> | Date | string
 }
 
 export type ImportCreateInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   importTransactions?: Prisma.ImportTransactionCreateNestedManyWithoutImportInput
   account: Prisma.AccountCreateNestedOneWithoutImportInput
 }
@@ -285,6 +298,7 @@ export type ImportUncheckedCreateInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   importTransactions?: Prisma.ImportTransactionUncheckedCreateNestedManyWithoutImportInput
 }
 
@@ -292,6 +306,7 @@ export type ImportUpdateInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   importTransactions?: Prisma.ImportTransactionUpdateManyWithoutImportNestedInput
   account?: Prisma.AccountUpdateOneRequiredWithoutImportNestedInput
 }
@@ -302,6 +317,7 @@ export type ImportUncheckedUpdateInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   importTransactions?: Prisma.ImportTransactionUncheckedUpdateManyWithoutImportNestedInput
 }
 
@@ -311,12 +327,14 @@ export type ImportCreateManyInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportUpdateManyMutationInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportUncheckedUpdateManyInput = {
@@ -325,6 +343,7 @@ export type ImportUncheckedUpdateManyInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportListRelationFilter = {
@@ -343,6 +362,7 @@ export type ImportCountOrderByAggregateInput = {
   fileName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportAvgOrderByAggregateInput = {
@@ -356,6 +376,7 @@ export type ImportMaxOrderByAggregateInput = {
   fileName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportMinOrderByAggregateInput = {
@@ -364,6 +385,7 @@ export type ImportMinOrderByAggregateInput = {
   fileName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ImportSumOrderByAggregateInput = {
@@ -436,6 +458,7 @@ export type ImportCreateWithoutAccountInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   importTransactions?: Prisma.ImportTransactionCreateNestedManyWithoutImportInput
 }
 
@@ -444,6 +467,7 @@ export type ImportUncheckedCreateWithoutAccountInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   importTransactions?: Prisma.ImportTransactionUncheckedCreateNestedManyWithoutImportInput
 }
 
@@ -482,12 +506,14 @@ export type ImportScalarWhereInput = {
   fileName?: Prisma.StringFilter<"Import"> | string
   status?: Prisma.StringFilter<"Import"> | string
   createdAt?: Prisma.DateTimeFilter<"Import"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Import"> | Date | string
 }
 
 export type ImportCreateWithoutImportTransactionsInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   account: Prisma.AccountCreateNestedOneWithoutImportInput
 }
 
@@ -497,6 +523,7 @@ export type ImportUncheckedCreateWithoutImportTransactionsInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportCreateOrConnectWithoutImportTransactionsInput = {
@@ -519,6 +546,7 @@ export type ImportUpdateWithoutImportTransactionsInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountUpdateOneRequiredWithoutImportNestedInput
 }
 
@@ -528,6 +556,7 @@ export type ImportUncheckedUpdateWithoutImportTransactionsInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ImportCreateManyAccountInput = {
@@ -535,12 +564,14 @@ export type ImportCreateManyAccountInput = {
   fileName: string
   status: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ImportUpdateWithoutAccountInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   importTransactions?: Prisma.ImportTransactionUpdateManyWithoutImportNestedInput
 }
 
@@ -549,6 +580,7 @@ export type ImportUncheckedUpdateWithoutAccountInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   importTransactions?: Prisma.ImportTransactionUncheckedUpdateManyWithoutImportNestedInput
 }
 
@@ -557,6 +589,7 @@ export type ImportUncheckedUpdateManyWithoutAccountInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -596,6 +629,7 @@ export type ImportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   fileName?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   importTransactions?: boolean | Prisma.Import$importTransactionsArgs<ExtArgs>
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ImportCountOutputTypeDefaultArgs<ExtArgs>
@@ -607,6 +641,7 @@ export type ImportSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   fileName?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["import"]>
 
@@ -616,6 +651,7 @@ export type ImportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   fileName?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["import"]>
 
@@ -625,9 +661,10 @@ export type ImportSelectScalar = {
   fileName?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ImportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "accountId" | "fileName" | "status" | "createdAt", ExtArgs["result"]["import"]>
+export type ImportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "accountId" | "fileName" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["import"]>
 export type ImportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   importTransactions?: boolean | Prisma.Import$importTransactionsArgs<ExtArgs>
   account?: boolean | Prisma.AccountDefaultArgs<ExtArgs>
@@ -652,6 +689,7 @@ export type $ImportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     fileName: string
     status: string
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["import"]>
   composites: {}
 }
@@ -1082,6 +1120,7 @@ export interface ImportFieldRefs {
   readonly fileName: Prisma.FieldRef<"Import", 'String'>
   readonly status: Prisma.FieldRef<"Import", 'String'>
   readonly createdAt: Prisma.FieldRef<"Import", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Import", 'DateTime'>
 }
     
 

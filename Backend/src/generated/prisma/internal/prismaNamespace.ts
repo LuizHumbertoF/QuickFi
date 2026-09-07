@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.9.1
- * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
+ * Prisma Client JS version: 7.10.0
+ * Query Engine version: 0edf323efd1d98336f3f0a68684b56f689b900d3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.9.1",
-  engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
+  client: "7.10.0",
+  engine: "0edf323efd1d98336f3f0a68684b56f689b900d3"
 }
 
 /**
@@ -881,7 +881,8 @@ export const ImportScalarFieldEnum = {
   accountId: 'accountId',
   fileName: 'fileName',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ImportScalarFieldEnum = (typeof ImportScalarFieldEnum)[keyof typeof ImportScalarFieldEnum]
@@ -893,13 +894,12 @@ export const ImportTransactionScalarFieldEnum = {
   date: 'date',
   description: 'description',
   amount: 'amount',
+  balance: 'balance',
   type: 'type',
   paymentType: 'paymentType',
-  sugestedCategoryId: 'sugestedCategoryId',
-  finalCategoryId: 'finalCategoryId',
-  confidente: 'confidente',
-  isDuplicate: 'isDuplicate',
-  selected: 'selected'
+  sugestedCategory: 'sugestedCategory',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ImportTransactionScalarFieldEnum = (typeof ImportTransactionScalarFieldEnum)[keyof typeof ImportTransactionScalarFieldEnum]
