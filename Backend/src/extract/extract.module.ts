@@ -6,6 +6,4 @@ import { ExtractService } from "./extract.service.js";
     controllers: [ExtractController],
     providers: [ExtractService]
 })
-export class ExtractModule {
-
-}
+export class ExtractModule { }
