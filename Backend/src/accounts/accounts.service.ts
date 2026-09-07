@@ -17,14 +17,20 @@ export class AccountsService {
         return accounts;
     }
 
-    async createAccount(data: CreateAccountDto, userId: number) {
-
+    async getAccount(name: string, userId: number) {
         const account = await this.prisma.account.findFirst({
             where: {
-                name: data.name,
+                name: name,
                 userId: userId
             }
         });
+
+        return account
+    }
+
+    async createAccount(data: CreateAccountDto, userId: number) {
+
+        const account = await this.getAccount(data.name, userId);
 
         if (account) {
             

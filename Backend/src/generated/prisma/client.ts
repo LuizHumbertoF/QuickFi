@@ -56,3 +56,13 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Transaction = Prisma.TransactionModel
+/**
+ * Model Import
+ * 
+ */
+export type Import = Prisma.ImportModel
+/**
+ * Model ImportTransaction
+ * 
+ */
+export type ImportTransaction = Prisma.ImportTransactionModel

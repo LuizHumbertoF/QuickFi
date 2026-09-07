@@ -265,6 +265,7 @@ export type AccountWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
+  import?: Prisma.ImportListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -280,6 +281,7 @@ export type AccountOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  import?: Prisma.ImportOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -299,6 +301,7 @@ export type AccountWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Account"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
+  import?: Prisma.ImportListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_name">
 
@@ -346,6 +349,7 @@ export type AccountCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
+  import?: Prisma.ImportCreateNestedManyWithoutAccountInput
   user: Prisma.UserCreateNestedOneWithoutAccountsInput
 }
 
@@ -361,6 +365,7 @@ export type AccountUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
+  import?: Prisma.ImportUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountUpdateInput = {
@@ -373,6 +378,7 @@ export type AccountUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
+  import?: Prisma.ImportUpdateManyWithoutAccountNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
 }
 
@@ -388,6 +394,7 @@ export type AccountUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
+  import?: Prisma.ImportUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountCreateManyInput = {
@@ -562,6 +569,20 @@ export type AccountUpdateOneRequiredWithoutTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AccountUpdateToOneWithWhereWithoutTransactionsInput, Prisma.AccountUpdateWithoutTransactionsInput>, Prisma.AccountUncheckedUpdateWithoutTransactionsInput>
 }
 
+export type AccountCreateNestedOneWithoutImportInput = {
+  create?: Prisma.XOR<Prisma.AccountCreateWithoutImportInput, Prisma.AccountUncheckedCreateWithoutImportInput>
+  connectOrCreate?: Prisma.AccountCreateOrConnectWithoutImportInput
+  connect?: Prisma.AccountWhereUniqueInput
+}
+
+export type AccountUpdateOneRequiredWithoutImportNestedInput = {
+  create?: Prisma.XOR<Prisma.AccountCreateWithoutImportInput, Prisma.AccountUncheckedCreateWithoutImportInput>
+  connectOrCreate?: Prisma.AccountCreateOrConnectWithoutImportInput
+  upsert?: Prisma.AccountUpsertWithoutImportInput
+  connect?: Prisma.AccountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AccountUpdateToOneWithWhereWithoutImportInput, Prisma.AccountUpdateWithoutImportInput>, Prisma.AccountUncheckedUpdateWithoutImportInput>
+}
+
 export type AccountCreateWithoutUserInput = {
   name: string
   type: string
@@ -572,6 +593,7 @@ export type AccountCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
+  import?: Prisma.ImportCreateNestedManyWithoutAccountInput
 }
 
 export type AccountUncheckedCreateWithoutUserInput = {
@@ -585,6 +607,7 @@ export type AccountUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
+  import?: Prisma.ImportUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountCreateOrConnectWithoutUserInput = {
@@ -638,6 +661,7 @@ export type AccountCreateWithoutTransactionsInput = {
   active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  import?: Prisma.ImportCreateNestedManyWithoutAccountInput
   user: Prisma.UserCreateNestedOneWithoutAccountsInput
 }
 
@@ -652,6 +676,7 @@ export type AccountUncheckedCreateWithoutTransactionsInput = {
   active: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  import?: Prisma.ImportUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountCreateOrConnectWithoutTransactionsInput = {
@@ -679,6 +704,7 @@ export type AccountUpdateWithoutTransactionsInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  import?: Prisma.ImportUpdateManyWithoutAccountNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
 }
 
@@ -693,6 +719,77 @@ export type AccountUncheckedUpdateWithoutTransactionsInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  import?: Prisma.ImportUncheckedUpdateManyWithoutAccountNestedInput
+}
+
+export type AccountCreateWithoutImportInput = {
+  name: string
+  type: string
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
+  user: Prisma.UserCreateNestedOneWithoutAccountsInput
+}
+
+export type AccountUncheckedCreateWithoutImportInput = {
+  id?: number
+  userId: number
+  name: string
+  type: string
+  institution?: string | null
+  color: string
+  amount: number
+  active: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
+}
+
+export type AccountCreateOrConnectWithoutImportInput = {
+  where: Prisma.AccountWhereUniqueInput
+  create: Prisma.XOR<Prisma.AccountCreateWithoutImportInput, Prisma.AccountUncheckedCreateWithoutImportInput>
+}
+
+export type AccountUpsertWithoutImportInput = {
+  update: Prisma.XOR<Prisma.AccountUpdateWithoutImportInput, Prisma.AccountUncheckedUpdateWithoutImportInput>
+  create: Prisma.XOR<Prisma.AccountCreateWithoutImportInput, Prisma.AccountUncheckedCreateWithoutImportInput>
+  where?: Prisma.AccountWhereInput
+}
+
+export type AccountUpdateToOneWithWhereWithoutImportInput = {
+  where?: Prisma.AccountWhereInput
+  data: Prisma.XOR<Prisma.AccountUpdateWithoutImportInput, Prisma.AccountUncheckedUpdateWithoutImportInput>
+}
+
+export type AccountUpdateWithoutImportInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
+}
+
+export type AccountUncheckedUpdateWithoutImportInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  institution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountCreateManyUserInput = {
@@ -717,6 +814,7 @@ export type AccountUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
+  import?: Prisma.ImportUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountUncheckedUpdateWithoutUserInput = {
@@ -730,6 +828,7 @@ export type AccountUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
+  import?: Prisma.ImportUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountUncheckedUpdateManyWithoutUserInput = {
@@ -751,10 +850,12 @@ export type AccountUncheckedUpdateManyWithoutUserInput = {
 
 export type AccountCountOutputType = {
   transactions: number
+  import: number
 }
 
 export type AccountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | AccountCountOutputTypeCountTransactionsArgs
+  import?: boolean | AccountCountOutputTypeCountImportArgs
 }
 
 /**
@@ -774,6 +875,13 @@ export type AccountCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * AccountCountOutputType without action
+ */
+export type AccountCountOutputTypeCountImportArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ImportWhereInput
+}
+
 
 export type AccountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -787,6 +895,7 @@ export type AccountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   transactions?: boolean | Prisma.Account$transactionsArgs<ExtArgs>
+  import?: boolean | Prisma.Account$importArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.AccountCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["account"]>
@@ -835,6 +944,7 @@ export type AccountSelectScalar = {
 export type AccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "institution" | "color" | "amount" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
 export type AccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Account$transactionsArgs<ExtArgs>
+  import?: boolean | Prisma.Account$importArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.AccountCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -849,6 +959,7 @@ export type $AccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Account"
   objects: {
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    import: Prisma.$ImportPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1257,6 +1368,7 @@ readonly fields: AccountFieldRefs;
 export interface Prisma__AccountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   transactions<T extends Prisma.Account$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Account$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  import<T extends Prisma.Account$importArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Account$importArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1719,6 +1831,30 @@ export type Account$transactionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * Account.import
+ */
+export type Account$importArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Import
+   */
+  select?: Prisma.ImportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Import
+   */
+  omit?: Prisma.ImportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ImportInclude<ExtArgs> | null
+  where?: Prisma.ImportWhereInput
+  orderBy?: Prisma.ImportOrderByWithRelationInput | Prisma.ImportOrderByWithRelationInput[]
+  cursor?: Prisma.ImportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ImportScalarFieldEnum | Prisma.ImportScalarFieldEnum[]
 }
 
 /**

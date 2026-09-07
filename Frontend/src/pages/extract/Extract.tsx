@@ -1,11 +1,16 @@
 import { Sidebar } from "../sidebar/Sidebar"
-import { useNavigate } from "react-router-dom";
-import { LuClock, LuChevronDown, LuFileUp, LuLandmark, LuChevronRight, LuCircleHelp} from "react-icons/lu";
+import { useRef, useState } from "react";
+import { LuClock, LuChevronDown, LuFileUp, LuLandmark, LuChevronRight, LuCircleHelp, LuCircleCheck} from "react-icons/lu";
+import { PostUserExtract } from "@/controllers/postUserExtract";
+import { useAuth } from "@/contexts/authContext";
 
-
+const postUserExtract = new PostUserExtract();
 
 export function Extract() {
-    const navigate = useNavigate();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [loading, setLoading] = useState<0 | 1 | 2>(0);
+    const { token } = useAuth();
 
     return (
 
@@ -39,7 +44,7 @@ export function Extract() {
                 </div>
 
                 <div className="flex w-full gap-4 p-3 items-center justify-center bg-white border border-[#94A3B8]/20 rounded-lg shadow-md">
-                    <div className="bg-[#10B981] rounded-full w-8 h-8 shadow-lg flex items-center justify-center text-white">1</div>
+                    <div className={`rounded-full w-8 h-8 shadow-lg flex items-center justify-center transition-colors duration-500 text-white ` + (selectedFile ? `bg-[#10B981]` : `bg-gray-400/80`)}>1</div>
                     <div className="flex flex-col">
                         <h3 className="text-gray-900 text-sm font-semibold">Upload do arquivo</h3>
                         <h3 className="text-gray-500 text-sm ">Selecione seu extrato</h3>
@@ -61,27 +66,79 @@ export function Extract() {
                 </div>
 
                 <div className="flex w-full h-full gap-4">
-                    <div className="p-3 gap-3 flex h-full flex-col w-1/2 bg-white border border-[#94A3B8]/20 rounded-lg shadow-md">
-                        <div className="cursor-pointer transition-all duration-200 hover:-translate-y-px p-4 gap-3 flex flex-col items-center justify-center bg-gray-400/10 h-3/5 w-full rounded-lg shadow border border-[#94A3B8]/20">
-                            <LuFileUp className="text-[#10B981]" size={35}/>
-                            <div className="flex flex-col">
-                                <h3 className="text-gray-900 font-semibold">Arraste seu extrato aqui</h3>
-                                <h3 className="text-gray-900 font-semibold">ou clique para selecionar</h3>
-                            </div>
+                    <div className="items-center p-3 gap-3 flex h-full flex-col w-1/2 bg-white border border-[#94A3B8]/20 rounded-lg shadow-md">
+                        
+                        <button 
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="cursor-pointer transition-all duration-200 hover:-translate-y-px p-4 gap-3 flex flex-col items-center justify-center bg-gray-400/10 h-3/5 w-full rounded-lg shadow border border-[#94A3B8]/20"
+                        >
                             
-                            <div className="flex items-center justify-center text-sm gap-1">
-                                <h3 className="text-gray-500 font-semibold">Formatos aceitos:</h3>
-                                <h3 className="text-[#10B981] font-semibold">CSV, OFX, XLSX, PDF</h3>
-                            </div>
-                        </div>
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept=".pdf,.csv,.xlsx,.ofx"
+                                className="hidden"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
 
-                        <div className="flex justify-center items-center gap-6">
+                                    if (file) {
+                                        console.log(file);
+                                        setSelectedFile(file);
+                                    }
+
+                                }}
+                            />
+                            { 
+                                !selectedFile ? (
+                                    <div className="flex flex-col items-center justify-center gap-3">
+                                        <LuFileUp className="text-[#10B981]" size={35}/>
+                                        <div className="flex flex-col">
+                                            <h3 className="text-gray-900 font-semibold">Arraste seu extrato aqui</h3>
+                                            <h3 className="text-gray-900 font-semibold">ou clique para selecionar</h3>
+                                        </div>
+
+                                        <div className="flex items-center justify-center text-sm gap-1">
+                                            <h3 className="text-gray-500 font-semibold">Formatos aceitos:</h3>
+                                            <h3 className="text-[#10B981] font-semibold">CSV, OFX, XLSX, PDF</h3>
+                                        </div>
+                                    </div>
+                                ) :
+                                (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <LuCircleCheck className="text-[#10B981]" size={35}/>
+                                        <h3 className="text-gray-900 font-semibold">{selectedFile.name}</h3>
+                                    </div>
+                                )
+                            }
+                        </button>
+
+                        <button 
+                            className="transition-all duration-200 hover:-translate-y-1 flex items-center justify-center bg-[#10B981] rounded-md p-1 text-white w-1/5 shadow-lg cursor-pointer"
+                            onClick={async () => {
+                                if(selectedFile && token) {
+                                    setLoading(1);
+                                    const response = await postUserExtract.execute(token, selectedFile);
+
+                                    if(response.status == 201) {
+                                        setLoading(2);
+                                    }
+                                    else {
+                                        setLoading(0);
+                                    }
+                                }
+                            }}
+                        >
+                            Enviar
+                        </button>
+
+                        <div className="flex justify-center w-full items-center gap-6">
                             <div className="bg-gray-200/80 w-full h-0.5 shadow-md" />
                             <h3 className="text-gray-500 font-semibold text-sm">ou</h3>
                             <div className="bg-gray-200/80 w-full h-0.5 shadow-md" />
                         </div>
 
-                        <div className="cursor-pointer transition-all duration-200 hover:-translate-y-px p-8 gap-4 flex items-center bg-white flex-1 w-full rounded-lg shadow border border-[#94A3B8]/20">
+                        <div className="cursor-pointer transition-all duration-200 hover:-translate-y-1 p-4 gap-4 flex items-center bg-white flex-1 w-full rounded-lg shadow border border-[#94A3B8]/20">
                             <LuLandmark className="text-gray-900" size={30}/>
                             <div className="flex flex-col justify-center">
                                 <h3 className="text-gray-900 font-semibold text-sm">Importe automaticamente sua conta</h3>
@@ -92,7 +149,10 @@ export function Extract() {
                     </div>
 
                     <div className="p-3 flex h-full flex-col w-1/2 bg-white border border-[#94A3B8]/20 rounded-lg shadow-md">
-                        
+                        <h2 className="text-gray-900 font-semibold">Revisar importação</h2>
+                        <div className="flex items-center justify-center w-full h-full text-gray-500 font-semibold">
+                            Revise sua atividade aqui...
+                        </div>
                     </div>
                 </div>
             

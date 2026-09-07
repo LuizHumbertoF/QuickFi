@@ -12,6 +12,9 @@ import { PrismaModule } from "../prisma/prisma.module.js";
     ],
     providers: [
         AccountsService
+    ],
+    exports: [
+        AccountsService
     ]
 })
 export class AccountsModule {}

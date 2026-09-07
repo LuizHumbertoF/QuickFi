@@ -4,6 +4,7 @@ import { AppController } from "./app.controller.js";
 import { AuthModule } from "./auth/auth.module.js";
 import { AccountsModule } from "./accounts/accounts.module.js";
 import { TransactionsModule } from "./transactions/transactions.module.js";
+import { ExtractModule } from "./extract/extract.module.js";
 
 @Module({
     imports: [
@@ -12,7 +13,8 @@ import { TransactionsModule } from "./transactions/transactions.module.js";
         }), 
         AuthModule,
         AccountsModule,
-        TransactionsModule
+        TransactionsModule,
+        ExtractModule
     ],
     controllers: [AppController],
     providers: [],
